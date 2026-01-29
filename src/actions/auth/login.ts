@@ -5,7 +5,11 @@ import { createSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
 
-export async function loginAction(prevState: any, formData: FormData) {
+export type ActionState = {
+  message?: string;
+} | undefined;
+
+export async function loginAction(prevState: ActionState, formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
@@ -42,5 +46,5 @@ export async function loginAction(prevState: any, formData: FormData) {
   }
 
   // 4. Redirect ke halaman tujuan (Harus di luar block try/catch)
-  redirect("/dashboard");
+  redirect("/admin/dashboard");
 }

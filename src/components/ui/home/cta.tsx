@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { Mail, MessageCircle, ArrowRight } from "lucide-react";
+import { Mail, MessageCircle} from "lucide-react";
 import Section from "@/components/layouts/sections";
 
 export const FinalCTA = () => (
