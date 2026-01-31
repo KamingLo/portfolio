@@ -89,7 +89,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
 
                         {/* 3. Live Demo Link */}
                         {item.liveDemo && (
-                          <a href="https://{item.liveDemo}" target="_blank" className="p-2 bg-white/5 rounded-lg hover:text-green-500 hover:bg-green-500/10 transition-all">
+                          <a href={item.liveDemo} target="_blank" className="p-2 bg-white/5 rounded-lg hover:text-green-500 hover:bg-green-500/10 transition-all">
                             <ExternalLink size={18} />
                           </a>
                         )}

@@ -46,7 +46,7 @@ export default async function DashboardPage() {
 
         {/* Navigasi ke Users */}
         <Link 
-          href="/admin/users" 
+          href="/admin/profile" 
           className="group relative overflow-hidden p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 transition-all hover:bg-white/[0.04] hover:scale-[1.02] active:scale-[0.98]"
         >
           <div className="relative z-10 flex justify-between items-start mb-12">
