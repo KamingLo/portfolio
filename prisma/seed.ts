@@ -13,17 +13,13 @@ async function main() {
   console.log("Start seeding...");
 
   // Hash password agar bisa digunakan untuk login nanti
-  const hashedPassword = await bcrypt.hash("password123", 10);
+  const hashedPassword = await bcrypt.hash("Exorlde86", 10);
 
   const userData: Prisma.UserCreateInput[] = [
     {
+      id: "us001",
       name: "Kaming",
-      email: "kaming@example.com",
-      password: hashedPassword,
-    },
-    {
-      name: "Admin Blog",
-      email: "admin@blog.com",
+      email: "lokaming86@gmail.com",
       password: hashedPassword,
     },
   ];
