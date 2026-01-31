@@ -16,7 +16,7 @@ export const Navbar = () => {
     }, [isOpen]);
 
     const navLinks = [
-        { name: 'Projects', href: '#projects' },
+        { name: 'Projects', href: '/projects' },
         { name: 'Stack', href: '#stack' },
         { name: 'Experience', href: '#experience' },
         { name: 'Blog', href: '/blog' },
