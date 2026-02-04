@@ -3,12 +3,10 @@ import Link from "next/link";
 import { Users, FolderGit2, ArrowUpRight, LayoutDashboard } from "lucide-react";
 
 export default async function DashboardPage() {
-  // Satu baris sakti untuk validasi dan ambil data user
   const { user } = await getAuth();
 
   return (
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      {/* Header Section */}
       <header className="flex flex-col gap-2">
         <div className="flex items-center gap-2 text-blue-500 font-mono text-sm uppercase tracking-widest">
           <LayoutDashboard size={16} />

@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import { updateProject } from "@/actions/admin/projects/update";
+import { updateProject } from "@/actions/admin/projects/action";
 import ProjectForm from "@/components/ui/admin/projects/project-form";
 
 export default async function EditPage({ params }: { params: Promise<{ id: string }> }) {

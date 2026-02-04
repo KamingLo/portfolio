@@ -1,4 +1,4 @@
-import { createProject } from "@/actions/admin/projects/create";
+import { createProject } from "@/actions/admin/projects/action";
 import ProjectForm from "@/components/ui/admin/projects/project-form";
 
 export default function NewProjectPage() {

@@ -1,4 +1,4 @@
-import { getPublicProjects } from "@/actions/public/projects/index";
+import { getPublicProjects } from "@/actions/public/projects/action";
 import ProjectList from "@/components/ui/projects/project-list";
 import Link from "next/link";
 import MainLayout from "@/components/layouts/main-layout";

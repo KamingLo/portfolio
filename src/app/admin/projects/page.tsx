@@ -1,4 +1,4 @@
-import { getProjects } from "@/actions/admin/projects";
+import { getProjects } from "@/actions/admin/projects/action";
 import { ArrowLeft, Plus, ExternalLink, Github, Pencil, Eye, Image as ImageIcon } from "lucide-react";
 import Link from "next/link";
 import DeleteButton from "@/components/ui/admin/projects/delete-button";
