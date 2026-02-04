@@ -16,8 +16,9 @@ export const Navbar = () => {
     }, [isOpen]);
 
     const navLinks = [
-        { name: 'Projects', href: '/projects' },
-        { name: 'Experience', href: '#experience' },
+        { name: 'Home', href: '/' },
+        { name: 'Project', href: '/projects' },
+        { name: 'Experience', href: '/experiences' },
         { name: 'Contact', href: '/contact' },
         { name: 'About me', href: '/about-me' },
     ];
@@ -48,10 +49,10 @@ export const Navbar = () => {
 
                     {/* Action Buttons */}
                     <div className="flex items-center gap-2">
-                        <button className="hidden md:flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-bold text-black hover:bg-zinc-200 transition-all active:scale-95">
+                        <Link href={"/contact"}className="hidden md:flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-bold text-black hover:bg-zinc-200 transition-all active:scale-95">
                             Let's Talk
                             <ArrowUpRight size={16} />
-                        </button>
+                        </Link>
                         
                         {/* Mobile Toggle - Z-Index paling tinggi */}
                         <button 

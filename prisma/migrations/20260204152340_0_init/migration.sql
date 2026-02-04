@@ -20,11 +20,27 @@ CREATE TABLE "Project" (
     "tags" TEXT[],
     "githubLink" TEXT,
     "liveDemo" TEXT,
-    "link" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Project_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Experience" (
+    "id" TEXT NOT NULL,
+    "job_title" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "skills" TEXT NOT NULL,
+    "company" TEXT NOT NULL,
+    "is_current" BOOLEAN NOT NULL DEFAULT false,
+    "start_date" TIMESTAMP(3) NOT NULL,
+    "end_date" TIMESTAMP(3),
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Experience_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -35,3 +51,6 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Project_id_key" ON "Project"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Experience_id_key" ON "Experience"("id");
