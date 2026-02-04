@@ -16,10 +16,10 @@ export default async function ExperiencePage({
 
   return (
     <MainLayout>
-      <Section className="py-16">
+      <Section>
         <div className="mb-20 space-y-4">
           <h2 className="text-md font-mono text-blue-500">Professional Journey</h2>
-          <h1 className="text-5xl md:text-7xl font-bold text-white">Experiences.</h1>
+          <h1 className="text-5xl md:text-7xl font-semibold text-white">Experiences</h1>
         </div>
 
         <ExperienceList experiences={experiences} />

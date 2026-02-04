@@ -10,7 +10,12 @@ export default async function Page({ searchParams }: { searchParams: { page?: st
 
   return (
     <MainLayout>
-    <Section className="">
+    <Section>
+        <div className="mb-20 space-y-4">
+          <h2 className="text-md font-mono text-blue-500">My Archive</h2>
+          <h1 className="text-5xl md:text-7xl font-medium text-white">Projects</h1>
+        </div>
+
       <ProjectList projects={projects} />
 
       {/* Pagination Controls */}
