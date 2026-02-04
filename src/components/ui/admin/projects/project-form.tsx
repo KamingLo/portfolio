@@ -61,13 +61,13 @@ export default function ProjectForm({ initialData, action, title }: ProjectFormP
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6 text-white animate-in fade-in duration-500 pb-20">
+    <div className="max-w-4xl mx-auto space-y-6 text-white animate-in fade-in duration-500 pb-20">
       {/* --- HEADER --- */}
       <header className="flex flex-col gap-2">
         <Link href="/admin/projects" className="flex items-center gap-2 text-zinc-500 hover:text-blue-400 text-sm w-fit transition-colors">
           <ArrowLeft size={16} /> Kembali ke Proyek
         </Link>
-        <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-white to-zinc-500 bg-clip-text text-transparent italic">{title}</h1>
+        <h1 className="text-3xl font-bold">{title}</h1>
       </header>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">

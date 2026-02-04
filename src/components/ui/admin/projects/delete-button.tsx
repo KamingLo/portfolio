@@ -1,12 +1,25 @@
 "use client";
 
-import { useState } from "react";
-import { Trash2, Loader2, AlertTriangle, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom"; // Tambahkan ini
+import { Trash2, Loader2, AlertTriangle } from "lucide-react";
 import { deleteProject } from "@/actions/admin/projects/action";
 
 export default function DeleteButton({ id, title }: { id: string; title: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Pastikan komponen sudah termount di client sebelum pakai Portal
+  useEffect(() => {
+    setMounted(true);
+    if (isOpen) {
+      document.body.style.overflow = "hidden"; // Lock scroll saat modal buka
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => { document.body.style.overflow = "unset"; };
+  }, [isOpen]);
 
   async function handleDelete() {
     setIsDeleting(true);
@@ -19,58 +32,64 @@ export default function DeleteButton({ id, title }: { id: string; title: string 
     }
   }
 
-  return (
-    <>
-      {/* Tombol Trigger */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="p-2.5 bg-white/5 hover:bg-red-600/20 text-zinc-400 hover:text-red-400 rounded-xl transition-all border border-white/5 hover:border-red-400/30"
-        title="Delete Project"
+  // Komponen Modal yang akan di-portal
+  const ModalContent = (
+    <div 
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-300"
+      onClick={() => !isDeleting && setIsOpen(false)}
+    >
+      <div 
+        className="bg-zinc-950 border border-zinc-800 w-full max-w-sm rounded-[2.5rem] p-10 animate-in zoom-in-95 duration-300"
+        onClick={(e) => e.stopPropagation()}
       >
-        <Trash2 size={16} />
-      </button>
+        <div className="flex flex-col items-center text-center space-y-6">
+          {/* Icon Warning yang lebih bold */}
+          <div className="p-6 bg-red-500/10 rounded-full text-red-500 animate-pulse">
+            <AlertTriangle size={40} strokeWidth={2.5} />
+          </div>
+          
+          <div className="space-y-3">
+            <h3 className="text-2xl font-bold text-white ">Hapus Proyek?</h3>
+            <p className="text-zinc-500 text-sm">
+              Kamu akan menghapus <span className="text-zinc-200 font-bold underline decoration-red-500/50">"{title}"</span> secara permanen dari database dan storage.
+            </p>
+          </div>
 
-      {/* Modal Overlay */}
-      {isOpen && (
-        <div className="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-300">
-          <div 
-            className="bg-zinc-900 border border-white/10 w-full max-w-md rounded-[2rem] p-8 shadow-2xl animate-in zoom-in-95 duration-300"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex flex-col items-center text-center space-y-4">
-              <div className="p-4 bg-red-500/10 rounded-full text-red-500">
-                <AlertTriangle size={32} />
-              </div>
-              
-              <div className="space-y-2">
-                <h3 className="text-xl font-bold text-white">Hapus Proyek?</h3>
-                <p className="text-zinc-400 text-sm">
-                  Apakah kamu yakin ingin menghapus <span className="text-white font-semibold">"{title}"</span>? 
-                  Tindakan ini permanen dan akan menghapus data dari database serta storage.
-                </p>
-              </div>
-
-              <div className="flex gap-3 w-full pt-4">
-                <button
-                  disabled={isDeleting}
-                  onClick={() => setIsOpen(false)}
-                  className="flex-1 px-6 py-3 bg-white/5 hover:bg-white/10 text-white rounded-xl font-medium transition-all"
-                >
-                  Batal
-                </button>
-                <button
-                  disabled={isDeleting}
-                  onClick={handleDelete}
-                  className="flex-1 px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2 shadow-lg shadow-red-600/20"
-                >
-                  {isDeleting ? <Loader2 size={18} className="animate-spin" /> : <Trash2 size={18} />}
-                  {isDeleting ? "Menghapus..." : "Ya, Hapus"}
-                </button>
-              </div>
-            </div>
+          <div className="flex flex-col gap-3 w-full pt-4">
+            <button
+              disabled={isDeleting}
+              onClick={handleDelete}
+              className="w-full px-6 py-4 bg-red-600 hover:bg-red-500 disabled:bg-zinc-800 text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-3 active:scale-95"
+            >
+              {isDeleting ? <Loader2 size={20} className="animate-spin" /> : <Trash2 size={20} />}
+              {isDeleting ? "Menghapus..." : "Ya, Hapus sekarang"}
+            </button>
+            
+            <button
+              disabled={isDeleting}
+              onClick={() => setIsOpen(false)}
+              className="w-full px-6 py-4 bg-transparent hover:bg-white/5 text-zinc-500 hover:text-white rounded-2xl transition-all text-md"
+            >
+              Batalkan
+            </button>
           </div>
         </div>
-      )}
+      </div>
+    </div>
+  );
+
+  return (
+    <>
+      <button
+        onClick={() => setIsOpen(true)}
+        className="p-3 bg-zinc-900 hover:bg-red-600/10 text-zinc-500 hover:text-red-500 rounded-2xl transition-all border border-zinc-800 hover:border-red-500/30"
+        title="Delete"
+      >
+        <Trash2 size={18} />
+      </button>
+
+      {/* Render modal menggunakan Portal agar tidak "ketimpa" */}
+      {isOpen && mounted && createPortal(ModalContent, document.body)}
     </>
   );
 }

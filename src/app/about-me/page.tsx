@@ -6,18 +6,17 @@ import Image from "next/image";
 export default function AboutPage() {
   return (
     <MainLayout>
-      <Section id="about-header" className="text-zinc-300 mt-10">
-        {/* Header Section - Identik dengan gaya Experience/Hero */}
+      <Section id="about-header" className="text-zinc-300">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24 gap-6 border-b border-white/5 pb-10">
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-              <span className="text-sm font-mono tracking-[0.2em] text-blue-500 font-semibold uppercase">
+              <span className="text-md font-mono text-blue-500 font-semibold">
                 The person behind the products
               </span>
             </div>
             <h2 className="text-5xl md:text-8xl font-bold text-white tracking-tighter">
-              About Me<span className="text-blue-600">.</span>
+              About Me
             </h2>
           </div>
           <p className="text-zinc-500 max-w-sm text-base md:text-lg font-medium leading-relaxed">
@@ -26,7 +25,6 @@ export default function AboutPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20">
-          {/* Bio Text - Menyambung dengan Hero */}
           <div className="lg:col-span-7 space-y-8 order-2 lg:order-1">
             <h3 className="text-3xl md:text-5xl font-semibold text-white tracking-tight leading-tight">
               Lebih dari sekadar coding, saya membangun solusi yang berkelanjutan.
@@ -44,16 +42,14 @@ export default function AboutPage() {
               </p>
             </div>
 
-            {/* Quote Card */}
             <div className="relative p-10 rounded-4xl border border-white/10 bg-white/[0.02] overflow-hidden group transition-all hover:bg-white/[0.04]">
                <div className="absolute top-0 left-0 w-1 h-full bg-blue-600 transition-all duration-500 group-hover:w-2" />
                <p className="text-white text-xl md:text-2xl font-medium italic">
-                 "Bagi saya, arsitektur backend yang baik adalah fondasi dari pengalaman pengguna yang luar biasa."
+                 "Bagi saya, arsitektur website yang baik adalah fondasi dari pengalaman pengguna yang luar biasa."
                </p>
             </div>
           </div>
 
-          {/* Right Side: Photo - Style konsisten dengan Hero */}
           <div className="lg:col-span-5 space-y-8 order-1 lg:order-2">
              <div className="relative aspect-[4/5] overflow-hidden rounded-[3rem] border border-white/20 bg-zinc-900 group shadow-2xl">
                 <Image 
@@ -63,18 +59,17 @@ export default function AboutPage() {
                   priority
                   className="object-cover transition-all duration-700 grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-105"
                 />
-                {/* Efek Glow seperti di Hero */}
                 <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-600/20 blur-[80px] -z-10" />
              </div>
 
              <div className="grid grid-cols-2 gap-4">
                 <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.01]">
-                   <span className="text-blue-500 font-mono text-[10px] block mb-1 uppercase tracking-widest">Main Stack</span>
-                   <span className="text-white font-medium text-lg">Full-stack</span>
+                   <span className="text-blue-500 font-mono text-md block mb-1">Main Interest</span>
+                   <span className="text-white font-medium text-md">Web-development</span>
                 </div>
                 <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.01]">
-                   <span className="text-blue-500 font-mono text-[10px] block mb-1 uppercase tracking-widest">Core Philosophy</span>
-                   <span className="text-white font-medium text-lg">Scalability</span>
+                   <span className="text-blue-500 font-mono text-md block mb-1">Philosophy</span>
+                   <span className="text-white font-medium text-md">Always Learn</span>
                 </div>
              </div>
           </div>
