@@ -29,3 +29,15 @@ export async function getPublicProjects(page: number = 1, limit: number = 4) {
     return { success: false, data: [], metadata: { total: 0, totalPages: 0, currentPage: 1 } };
   }
 }
+
+export async function getProjectBySlug(slug: string) {
+  try {
+    const project = await prisma.project.findFirst({
+      where: { slug }, // findFirst mengizinkan pencarian field apa pun
+    });
+    return project;
+  } catch (error) {
+    console.error("Error fetching project:", error);
+    return null;
+  }
+}

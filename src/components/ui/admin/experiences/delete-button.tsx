@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Trash2, Loader2, AlertTriangle, X } from "lucide-react";
-import { deleteProject } from "@/actions/admin/projects/action";
+import { deleteExperience } from "@/actions/admin/experiences/action";
 
 export default function DeleteButton({ id, title }: { id: string; title: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +10,7 @@ export default function DeleteButton({ id, title }: { id: string; title: string 
 
   async function handleDelete() {
     setIsDeleting(true);
-    const result = await deleteProject(id);
+    const result = await deleteExperience(id);
     if (!result.success) {
       alert(result.message);
       setIsDeleting(false);

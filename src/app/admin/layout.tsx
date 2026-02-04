@@ -19,6 +19,7 @@ import { useFormStatus } from "react-dom";
 const MENU_ITEMS = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { name: "Projects", href: "/admin/projects", icon: Briefcase },
+  { name: "Experiences", href: "/admin/experiences", icon: Briefcase },
   { name: "Profile", href: "/admin/profile", icon: User },
   { name: "Settings", href: "/admin/settings", icon: Settings },
 ];
