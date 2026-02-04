@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import Section from "@/components/layouts/sections";
-import { getHomeProjects } from "@/actions/public/home/projects";
+import { getHomeProjects } from "@/actions/public/home/action";
 
 export default async function Projects() {
     const projects = await getHomeProjects(2);

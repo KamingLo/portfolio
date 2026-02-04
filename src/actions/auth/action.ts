@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { createSession } from "@/lib/session";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
 
@@ -47,4 +48,14 @@ export async function loginAction(prevState: ActionState, formData: FormData) {
 
   // 4. Redirect ke halaman tujuan (Harus di luar block try/catch)
   redirect("/admin/dashboard");
+}
+
+export async function logoutAction() {
+  const cookieStore = await cookies();
+  
+  // Hapus cookie bernama 'session' yang berisi JWT
+  cookieStore.delete("session");
+
+  // Redirect ke halaman login setelah logout berhasil
+  redirect("/login");
 }
