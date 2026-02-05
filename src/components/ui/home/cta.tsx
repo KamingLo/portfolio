@@ -3,7 +3,7 @@ import Section from "@/components/layouts/sections";
 
 export const FinalCTA = () => (
   // Tambahkan px-4 agar di HP tidak menempel ke pinggir layar
-  <Section id="contact" data-aos="fade-up" className="mb-20 px-4 md:px-0 [-webkit-tap-highlight-color:transparent]">
+  <Section id="contact" data-aos="fade-up" className="mb-20 [-webkit-tap-highlight-color:transparent]">
     <div className="relative overflow-hidden rounded-[2rem] bg-blue-800 p-8 md:p-16 text-center shadow-[0_0_80px_rgba(37,99,235,0.15)]">
       <div className="relative z-10 space-y-8 md:space-y-12 my-6 md:my-10">
         
