@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation'; // Tambahkan ini jika ingin navigasi lebih presisi
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
 export const Navbar = () => {
@@ -24,7 +23,7 @@ export const Navbar = () => {
         { name: 'About me', href: '/about-me' },
     ];
 
-    const handleNavigation = (href: string) => {
+    const delayNavigation = () => {
         setTimeout(() => {
             setIsOpen(false);
         }, 350);
@@ -54,7 +53,7 @@ export const Navbar = () => {
 
                     <div className="flex items-center gap-2">
                         <Link href={"/contact"} className="hidden md:flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-bold text-black active:bg-blue-500 active:text-white transition-all">
-                            Let's talk
+                            Let&apos;s talk
                             <ArrowUpRight size={16} />
                         </Link>
                         
@@ -82,7 +81,7 @@ export const Navbar = () => {
                             <li key={link.name}>
                                 <Link
                                     href={link.href}
-                                    onClick={() => handleNavigation(link.href)}
+                                    onClick={() => delayNavigation()}
                                     // Efek Klik: Teks dan garis bawah jadi biru
                                     className="flex items-center justify-between text-4xl font-bold text-white border-b border-white/5 pb-6 transition-all duration-200 active:text-blue-500 active:border-blue-500"
                                 >

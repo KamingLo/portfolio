@@ -35,7 +35,7 @@ export default function AboutPage() {
                 Melanjutkan apa yang saya sampaikan di awal: saya adalah <span className="text-white">Kaming Lo</span>. Perjalanan saya di dunia teknologi unik karena saya berdiri di dua sisi—sebagai pengembang aktif dan sebagai seorang pengajar. 
               </p>
               <p>
-                Sebagai spesialis di ekosistem <span className="text-blue-400 font-medium">Next.js</span> dan <span className="text-white font-medium">Laravel</span>, saya tidak hanya fokus pada "asal jalan". Latar belakang saya sebagai pengajar menuntut saya untuk selalu menulis kode yang bersih, terdokumentasi, dan mudah dipahami—standar yang saya bawa ke setiap produk digital yang saya bangun.
+                Sebagai spesialis di ekosistem <span className="text-blue-400 font-medium">Next.js</span> dan <span className="text-white font-medium">Laravel</span>, saya tidak hanya fokus pada &quot;asal jalan&quot;. Latar belakang saya sebagai pengajar menuntut saya untuk selalu menulis kode yang bersih, terdokumentasi, dan mudah dipahami—standar yang saya bawa ke setiap produk digital yang saya bangun.
               </p>
               <p>
                 Fokus utama saya saat ini adalah menciptakan aplikasi yang memiliki performa tinggi dan <span className="text-zinc-200">User Experience</span> yang mulus. Di luar itu, gairah saya pada analisis data dan pasar modal membantu saya melihat setiap proyek dari kacamata bisnis dan logika yang tajam.
@@ -45,7 +45,7 @@ export default function AboutPage() {
             <div className="relative p-10 rounded-4xl border border-white/10 bg-white/[0.02] overflow-hidden group transition-all hover:bg-white/[0.04]">
                <div className="absolute top-0 left-0 w-1 h-full bg-blue-600 transition-all duration-500 group-hover:w-2" />
                <p className="text-white text-xl md:text-2xl font-medium italic">
-                 "Bagi saya, arsitektur website yang baik adalah fondasi dari pengalaman pengguna yang luar biasa."
+                 &quot;Bagi saya, arsitektur website yang baik adalah fondasi dari pengalaman pengguna yang luar biasa.&quot;
                </p>
             </div>
           </div>

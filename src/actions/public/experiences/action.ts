@@ -2,40 +2,28 @@
 
 import { prisma } from "@/lib/prisma";
 
-export async function getPublicExperiences(page: number = 1, limit: number = 4) {
+export async function getPublicExperiences() {
   try {
-    const skip = (page - 1) * limit;
-
-    // Ambil data dan total count secara paralel untuk efisiensi
-    const [experiences, total] = await Promise.all([
-      prisma.experience.findMany({
-        skip,
-        take: limit,
-        // Urutkan: Yang masih bekerja (is_current) di atas, 
-        // lalu berdasarkan tanggal mulai terbaru
-        orderBy: [
-          { is_current: 'desc' },
-          { start_date: 'desc' }
-        ],
-      }),
-      prisma.experience.count(),
-    ]);
+    // Langsung ambil semua data tanpa skip/limit pagination
+    const experiences = await prisma.experience.findMany({
+      // Urutkan: Yang masih bekerja (is_current) di atas, 
+      // lalu berdasarkan tanggal mulai terbaru
+      orderBy: [
+        { is_current: 'desc' },
+        { start_date: 'desc' }
+      ],
+    });
 
     return {
       success: true,
       data: experiences,
-      metadata: {
-        total,
-        totalPages: Math.ceil(total / limit),
-        currentPage: page,
-      }
     };
   } catch (error) {
     console.error("Public Fetch Error:", error);
     return { 
       success: false, 
-      data: [], 
-      metadata: { total: 0, totalPages: 0, currentPage: 1 } 
+      data: [],
+      message: "Gagal mengambil data pengalaman." 
     };
   }
 }

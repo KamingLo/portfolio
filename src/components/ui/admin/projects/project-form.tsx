@@ -1,18 +1,31 @@
-
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { 
     ArrowLeft, Upload, Save, Loader2, X, Maximize2, RefreshCw, 
     Bold, Italic, List, ListOrdered, Quote, Minus, Heading1, Heading2, Heading3 
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image"; // FIX: Import Image
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
+interface ProjectData {
+  id?: string;
+  title?: string;
+  subtitle?: string;
+  category?: string;
+  description?: string;
+  explanation?: string;
+  image?: string;
+  tags?: string[];
+  githubLink?: string;
+  liveDemo?: string;
+}
+
 interface ProjectFormProps {
-  initialData?: any;
+  initialData?: ProjectData;
   action: (formData: FormData) => Promise<{ success: boolean; message: string }>;
   title: string;
 }
@@ -25,16 +38,15 @@ export default function ProjectForm({ initialData, action, title }: ProjectFormP
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const editor = useEditor({
-  extensions: [StarterKit],
-  content: initialData?.explanation || '',
-  immediatelyRender: false,
-  editorProps: {
-    attributes: {
-      // Kita tambahkan class 'tiptap' sebagai hook untuk CSS custom kita
-      class: 'tiptap prose prose-sm prose-invert focus:outline-none max-w-none min-h-[350px] p-6',
+    extensions: [StarterKit],
+    content: initialData?.explanation || '',
+    immediatelyRender: false,
+    editorProps: {
+      attributes: {
+        class: 'tiptap prose prose-sm prose-invert focus:outline-none max-w-none min-h-[350px] p-6',
+      },
     },
-  },
-});
+  });
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -62,7 +74,6 @@ export default function ProjectForm({ initialData, action, title }: ProjectFormP
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 text-white animate-in fade-in duration-500 pb-20">
-      {/* --- HEADER --- */}
       <header className="flex flex-col gap-2">
         <Link href="/admin/projects" className="flex items-center gap-2 text-zinc-500 hover:text-blue-400 text-sm w-fit transition-colors">
           <ArrowLeft size={16} /> Kembali ke Proyek
@@ -81,7 +92,6 @@ export default function ProjectForm({ initialData, action, title }: ProjectFormP
 
           <Textarea label="Deskripsi Singkat" name="description" defaultValue={initialData?.description} rows={3} required placeholder="Ringkasan proyek untuk kartu portfolio..." />
           
-          {/* TIPTAP EDITOR CONTAINER */}
           <div className="space-y-2">
             <div className="flex justify-between items-center ml-1">
               <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Studi Kasus / Detail Proyek</label>
@@ -89,23 +99,10 @@ export default function ProjectForm({ initialData, action, title }: ProjectFormP
             </div>
             
             <div className="rounded-3xl border border-white/10 bg-zinc-950/50 overflow-hidden focus-within:ring-2 focus-within:ring-blue-500/30 transition-all">
-              {/* TOOLBAR */}
               <div className="flex flex-wrap items-center gap-1 p-3 border-b border-white/5 bg-white/[0.02]">
-                <ToolbarButton 
-                  onClick={() => editor?.chain().focus().toggleHeading({ level: 1 }).run()} 
-                  active={editor?.isActive('heading', { level: 1 })}
-                  icon={<Heading1 size={18} />} 
-                />
-                <ToolbarButton 
-                  onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()} 
-                  active={editor?.isActive('heading', { level: 2 })}
-                  icon={<Heading2 size={18} />} 
-                />
-                <ToolbarButton 
-                  onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()} 
-                  active={editor?.isActive('heading', { level: 3 })}
-                  icon={<Heading3 size={18} />} 
-                />
+                <ToolbarButton onClick={() => editor?.chain().focus().toggleHeading({ level: 1 }).run()} active={editor?.isActive('heading', { level: 1 })} icon={<Heading1 size={18} />} />
+                <ToolbarButton onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()} active={editor?.isActive('heading', { level: 2 })} icon={<Heading2 size={18} />} />
+                <ToolbarButton onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()} active={editor?.isActive('heading', { level: 3 })} icon={<Heading3 size={18} />} />
                 <div className="w-px h-6 bg-white/10 mx-1" />
                 <ToolbarButton onClick={() => editor?.chain().focus().toggleBold().run()} active={editor?.isActive('bold')} icon={<Bold size={18} />} />
                 <ToolbarButton onClick={() => editor?.chain().focus().toggleItalic().run()} active={editor?.isActive('italic')} icon={<Italic size={18} />} />
@@ -119,7 +116,6 @@ export default function ProjectForm({ initialData, action, title }: ProjectFormP
 
               <EditorContent editor={editor} />
               
-              {/* Footer Editor (Word Count) */}
               <div className="px-4 py-2 border-t border-white/5 bg-white/[0.01] flex justify-end">
                 <span className="text-[10px] text-zinc-600 font-mono">
                   {editor?.storage.characterCount?.characters?.() || 0} characters
@@ -129,7 +125,6 @@ export default function ProjectForm({ initialData, action, title }: ProjectFormP
           </div>
         </div>
 
-        {/* --- SIDEBAR --- */}
         <div className="space-y-6">
           <div className="bg-white/[0.03] p-8 rounded-[2.5rem] border border-white/5 space-y-6 shadow-2xl sticky top-6">
             <div className="space-y-2">
@@ -137,7 +132,14 @@ export default function ProjectForm({ initialData, action, title }: ProjectFormP
               <div className="relative aspect-[4/3] rounded-[2rem] border-2 border-dashed border-white/10 bg-zinc-950 overflow-hidden group">
                 {preview ? (
                   <>
-                    <img src={preview} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Preview" />
+                    {/* FIX: Menggunakan Next.js Image */}
+                    <Image 
+                      src={preview} 
+                      alt="Preview" 
+                      fill 
+                      unoptimized // Penting untuk URL Blob/Object agar tidak error
+                      className="object-cover group-hover:scale-105 transition-transform duration-500" 
+                    />
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center gap-3">
                       <button type="button" onClick={() => setIsModalOpen(true)} className="p-3 bg-white/10 rounded-2xl hover:bg-white/20 backdrop-blur-md"><Maximize2 size={20} /></button>
                       <button type="button" onClick={() => fileInputRef.current?.click()} className="p-3 bg-blue-500/20 rounded-2xl hover:bg-blue-500/40 text-blue-400 backdrop-blur-md"><RefreshCw size={20} /></button>
@@ -167,18 +169,37 @@ export default function ProjectForm({ initialData, action, title }: ProjectFormP
         </div>
       </form>
 
-      {/* MODAL FULL PREVIEW */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md p-8" onClick={() => setIsModalOpen(false)}>
           <button className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors"><X size={40} /></button>
-          <img src={preview} className="max-w-full max-h-full rounded-3xl shadow-2xl border border-white/10 object-contain" alt="Full" />
+          {/* FIX: Menggunakan Next.js Image untuk Modal Preview */}
+          <div className="relative w-full h-full">
+            <Image 
+              src={preview} 
+              alt="Full Preview" 
+              fill 
+              unoptimized
+              className="object-contain" 
+            />
+          </div>
         </div>
       )}
     </div>
   );
 }
 
-const ToolbarButton = ({ onClick, active, icon }: any) => (
+// --- SUB-COMPONENTS ---
+// ... (Input, Textarea, ToolbarButton tetap sama)
+
+// --- SUB-COMPONENTS DENGAN TIPE DATA ---
+
+interface ToolbarButtonProps {
+  onClick: () => void;
+  active?: boolean;
+  icon: React.ReactNode;
+}
+
+const ToolbarButton = ({ onClick, active, icon }: ToolbarButtonProps) => (
   <button
     type="button"
     onClick={onClick}
@@ -188,14 +209,22 @@ const ToolbarButton = ({ onClick, active, icon }: any) => (
   </button>
 );
 
-const Input = ({ label, ...props }: any) => (
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+}
+
+const Input = ({ label, ...props }: InputProps) => (
   <div className="space-y-1.5">
     <label className="text-xs font-medium text-zinc-500 ml-1 uppercase">{label}</label>
     <input {...props} className="w-full bg-white/5 border border-white/10 p-3.5 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-sm" />
   </div>
 );
 
-const Textarea = ({ label, ...props }: any) => (
+interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label: string;
+}
+
+const Textarea = ({ label, ...props }: TextareaProps) => (
   <div className="space-y-1.5">
     <label className="text-xs font-medium text-zinc-500 ml-1 uppercase">{label}</label>
     <textarea {...props} className="w-full bg-white/5 border border-white/10 p-3.5 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-sm resize-none" />

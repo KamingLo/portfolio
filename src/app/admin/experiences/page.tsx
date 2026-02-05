@@ -1,5 +1,5 @@
 import { getExperiences } from "@/actions/admin/experiences/action";
-import { ArrowLeft, Plus, Pencil, Briefcase, Calendar } from "lucide-react";
+import { Plus, Pencil, Briefcase, Calendar } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import DeleteButton from "@/components/ui/admin/experiences/delete-button";
