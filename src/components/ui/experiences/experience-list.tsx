@@ -4,8 +4,8 @@ import { format } from "date-fns";
 interface Experience {
     id: string;
     job_title: string;
-    start_date: string;
-    end_date?: string;
+    start_date: Date | string;
+    end_date?: Date | string;
     is_current: boolean;
     company: string;
     description: string;

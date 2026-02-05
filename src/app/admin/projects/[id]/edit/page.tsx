@@ -9,9 +9,18 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
 
   if (!project) notFound();
 
+  // Konversi semua properti yang berpotensi 'null' menjadi 'undefined'
+  // agar cocok dengan interface ProjectData
+  const formattedProject = {
+    ...project,
+    explanation: project.explanation ?? undefined,
+    githubLink: project.githubLink ?? undefined,
+    liveDemo: project.liveDemo ?? undefined,
+  };
+
   return (
     <ProjectForm 
-      initialData={project} 
+      initialData={formattedProject} 
       action={updateProject} 
       title="Edit Proyek" 
     />

@@ -4,7 +4,7 @@ import { decrypt } from "@/lib/session";
 const adminPrefix = "/admin";
 const authRoute = "/login";
 
-export default async function middleware(req: NextRequest) {
+export default async function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;
 
   const isAdminRoute = path.startsWith(adminPrefix);
