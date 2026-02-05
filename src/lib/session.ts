@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 const secretKey = process.env.SESSION_SECRET || "rahasia-super-kuat-123";
 const key = new TextEncoder().encode(secretKey);
 
-export async function encrypt(payload: any) {
+export async function encrypt(payload: { userId: string; expires: Date }) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()

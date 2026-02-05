@@ -2,10 +2,15 @@
 
 import { prisma } from "@/lib/prisma";
 import { createSession } from "@/lib/session";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
 
-export async function loginAction(prevState: any, formData: FormData) {
+export type ActionState = {
+  message?: string;
+} | undefined;
+
+export async function loginAction(prevState: ActionState, formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
@@ -36,11 +41,20 @@ export async function loginAction(prevState: any, formData: FormData) {
     // 3. Buat Session JWT & Simpan di Cookie
     await createSession(user.id.toString());
     
-  } catch (error) {
-    // Menangani error database atau server lainnya
-    return { message: "Terjadi kesalahan sistem. Coba lagi nanti." };
+  } catch {
+    return { message: "Terjadi kesalahan sistem. Coba lagi nanti",};
   }
 
   // 4. Redirect ke halaman tujuan (Harus di luar block try/catch)
-  redirect("/dashboard");
+  redirect("/admin/dashboard");
+}
+
+export async function logoutAction() {
+  const cookieStore = await cookies();
+  
+  // Hapus cookie bernama 'session' yang berisi JWT
+  cookieStore.delete("session");
+
+  // Redirect ke halaman login setelah logout berhasil
+  redirect("/login");
 }

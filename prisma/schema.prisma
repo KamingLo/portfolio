@@ -14,8 +14,39 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
+  id    String @unique @id
   email String  @unique
   name  String?
   password String
+}
+
+model Project {
+  id  String   @id @unique
+  title  String
+  subtitle  String
+  image  String   
+  description  String   @db.Text
+  explanation  String?  @db.Text
+  category  String   
+  tags  String[] 
+  githubLink   String?  
+  liveDemo     String?  
+  slug         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Experience{
+    id String @id @unique
+    job_title String
+    description String @db.Text
+    skills String
+    company String
+
+    is_current Boolean @default(false)
+    start_date DateTime
+    end_date DateTime?
+
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
 }

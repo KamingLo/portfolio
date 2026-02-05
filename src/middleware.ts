@@ -1,33 +1,38 @@
 import { NextRequest, NextResponse } from "next/server";
 import { decrypt } from "@/lib/session";
 
-// 1. Tentukan route mana saja yang harus login (Protected Routes)
-const protectedRoutes = ["/dashboard", "/profile"];
-const publicRoutes = ["/login", "/signup", "/"];
+const adminPrefix = "/admin";
+const authRoute = "/login";
 
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
-  const isProtectedRoute = protectedRoutes.some((route) => path.startsWith(route));
-  const isPublicRoute = publicRoutes.includes(path);
 
-  // 2. Ambil session dari cookie
+  const isAdminRoute = path.startsWith(adminPrefix);
+  const isAuthPage = path === authRoute;
+
   const cookie = req.cookies.get("session")?.value;
   const session = cookie ? await decrypt(cookie).catch(() => null) : null;
 
-  // 3. Redirect ke /login jika mencoba akses halaman terproteksi tanpa session
-  if (isProtectedRoute && !session) {
-    return NextResponse.redirect(new URL("/login", req.nextUrl));
+  // 1. Logika baru: Redirect /admin ke /admin/dashboard
+  if (path === adminPrefix || path === `${adminPrefix}/`) {
+    // Jika sudah login, ke dashboard. Jika belum, ke login.
+    const destination = session ? `${adminPrefix}/dashboard` : authRoute;
+    return NextResponse.redirect(new URL(destination, req.nextUrl));
   }
 
-  // 4. Redirect ke /dashboard jika sudah login tapi mencoba ke halaman login lagi
-  if (isPublicRoute && session && path !== "/") {
-    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
+  // 2. Proteksi rute admin/*
+  if (isAdminRoute && !session) {
+    return NextResponse.redirect(new URL(authRoute, req.nextUrl));
+  }
+
+  // 3. Redirect jika sudah login tapi akses halaman login
+  if (isAuthPage && session) {
+    return NextResponse.redirect(new URL(`${adminPrefix}/dashboard`, req.nextUrl));
   }
 
   return NextResponse.next();
 }
 
-// Tambahkan Matcher agar middleware tidak berjalan di semua file (seperti static files)
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 };
