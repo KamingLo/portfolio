@@ -3,6 +3,7 @@ import ProjectList from "@/components/ui/projects/project-list";
 import Link from "next/link";
 import MainLayout from "@/components/layouts/main-layout";
 import Section from "@/components/layouts/sections";
+// ... (import tetap sama)
 
 export default async function Page({ 
   searchParams 
@@ -14,6 +15,16 @@ export default async function Page({
   
   const { data: projects, metadata } = await getPublicProjects(currentPage, 4);
 
+  // Lakukan mapping untuk membersihkan data dari NULL dan DATE object
+  const formattedProjects = projects?.map((project) => ({
+    ...project,
+    // Gunakan ?? undefined untuk mengganti null agar aman di TypeScript
+    image: project.image ?? undefined,
+    githubLink: project.githubLink ?? undefined,
+    liveDemo: project.liveDemo ?? undefined,
+    explanation: project.explanation ?? undefined,
+  }));
+
   return (
     <MainLayout>
       <Section>
@@ -22,7 +33,8 @@ export default async function Page({
           <h1 className="text-5xl md:text-7xl font-medium text-white tracking-tighter uppercase">Projects</h1>
         </div>
 
-        <ProjectList projects={projects} />
+        {/* Kirim data yang sudah di-format, bukan data mentah dari Prisma */}
+        <ProjectList projects={formattedProjects} />
 
         {/* SECTION: [PAGINATION CENTERED] */}
         {metadata.totalPages > 1 && (
@@ -41,7 +53,6 @@ export default async function Page({
                     : "text-2xl md:text-2xl text-zinc-800 hover:text-zinc-500 font-light leading-none"
                   }`}
                 >
-                  {/* Format angka 01, 02, dst */}
                   {pageNum < 10 ? `0${pageNum}` : pageNum}
                 </Link>
               );
