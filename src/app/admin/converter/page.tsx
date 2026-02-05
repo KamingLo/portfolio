@@ -1,15 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, useRef, ChangeEvent } from "react";
+import Image from "next/image";
+import { useState, useEffect, useRef, ChangeEvent, useCallback } from "react";
 
 export default function WebPConverterPage() {
   // --- STATE ---
   const [quality, setQuality] = useState<number>(80);
   const [showResult, setShowResult] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
-  // Diubah ke null agar tidak memicu download ulang saat pertama render
-  const [webpUrl, setWebpUrl] = useState<string | null>(null); 
+  const [webpUrl, setWebpUrl] = useState<string | null>(null);
   const [originalSizeStr, setOriginalSizeStr] = useState<string>("");
   const [newSizeStr, setNewSizeStr] = useState<string>("");
   const [reduction, setReduction] = useState<string>("");
@@ -34,7 +34,8 @@ export default function WebPConverterPage() {
     return num;
   };
 
-  const convert = (img: HTMLImageElement, currentQuality: number) => {
+  // FIX: Menggunakan useCallback agar fungsi stabil dan tidak memicu useEffect berlebihan
+  const convert = useCallback((img: HTMLImageElement, currentQuality: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -55,7 +56,7 @@ export default function WebPConverterPage() {
     const originalBytes = parseToBytes(originalSizeStr);
     const saved = (((originalBytes - sizeInBytes) / originalBytes) * 100).toFixed(1);
     setReduction((parseFloat(saved) > 0 ? saved : "0") + "%");
-  };
+  }, [originalSizeStr]); // Dependency originalSizeStr krn digunakan di dalam fungsi
 
   const processImage = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -66,7 +67,7 @@ export default function WebPConverterPage() {
 
     const reader = new FileReader();
     reader.onload = (event) => {
-      const img = new Image();
+      const img = new window.Image(); // Gunakan window.Image untuk native constructor
       img.onload = () => {
         setRawImage(img);
         setShowResult(true);
@@ -76,15 +77,15 @@ export default function WebPConverterPage() {
     reader.readAsDataURL(file);
   };
 
+  // FIX: Memasukkan 'convert' ke dalam dependency array
   useEffect(() => {
     if (rawImage) {
       convert(rawImage, quality);
     }
-  }, [quality, rawImage, originalSizeStr]);
+  }, [quality, rawImage, convert]);
 
   return (
-    // Background diubah ke hitam pekat (bg-black)
-    <div className="min-h-screen bg-black text-zinc-300">
+    <div className="min-h-screen bg-black text-zinc-300 p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         
         {/* Header */}
@@ -108,7 +109,7 @@ export default function WebPConverterPage() {
         </div>
 
         <div className="space-y-8">
-          {/* Upload Area - Dark Theme */}
+          {/* Upload Area */}
           <div className="bg-zinc-900/30 rounded-3xl border border-zinc-800 p-12 text-center hover:border-blue-500/50 transition-all group">
             <input type="file" id="conv_upload" className="hidden" accept="image/*" onChange={processImage} />
             <label htmlFor="conv_upload" className="cursor-pointer">
@@ -127,7 +128,7 @@ export default function WebPConverterPage() {
           {showResult && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
               
-              {/* Settings Card - Dark */}
+              {/* Settings Card */}
               <div className="bg-zinc-900/40 p-8 rounded-3xl border border-zinc-800 space-y-6">
                 <h3 className="text-[10px] font-mono font-bold text-blue-500 uppercase tracking-[0.3em]">Configurations</h3>
 
@@ -159,16 +160,19 @@ export default function WebPConverterPage() {
                 </div>
               </div>
 
-              {/* Preview Card - Dark */}
+              {/* Preview Card */}
               <div className="bg-zinc-900/40 p-8 rounded-3xl border border-zinc-800 flex flex-col items-center justify-center relative overflow-hidden">
                 <h3 className="text-[10px] font-mono font-bold text-zinc-600 uppercase tracking-[0.3em] mb-6 self-start">Live Preview</h3>
 
                 <div className="relative group cursor-zoom-in" onClick={() => webpUrl && setShowModal(true)}>
-                  {/* Kondisi webpUrl && digunakan agar img tidak di-render jika src null */}
                   {webpUrl && (
-                    <img
-                      src={webpUrl} alt="Preview"
-                      className="max-h-64 rounded-xl shadow-2xl transition-all group-hover:scale-105"
+                    <Image
+                      src={webpUrl} 
+                      alt="Preview"
+                      width={800}
+                      height={600}
+                      unoptimized // Penting untuk dataURL/blob klien
+                      className="max-h-64 w-auto rounded-xl shadow-2xl transition-all group-hover:scale-105 object-contain"
                     />
                   )}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -195,7 +199,7 @@ export default function WebPConverterPage() {
         </div>
       </div>
 
-      {/* Modal - Dark Overlay */}
+      {/* Modal Overlay */}
       {showModal && webpUrl && (
         <div
           className="fixed inset-0 z-[999] flex items-center justify-center bg-black/95 p-4 md:p-10 animate-in fade-in duration-300"
@@ -206,7 +210,14 @@ export default function WebPConverterPage() {
               <path d="M6 18L18 6M6 6l12 12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
-          <img src={webpUrl} className="max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain" alt="Full Preview" />
+          <Image 
+            src={webpUrl} 
+            alt="Full Preview"
+            width={1200}
+            height={800}
+            unoptimized
+            className="max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain" 
+          />
         </div>
       )}
     </div>

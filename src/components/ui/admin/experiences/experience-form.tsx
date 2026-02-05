@@ -1,19 +1,30 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { 
-    ArrowLeft, Save, Loader2, Briefcase, Calendar, 
-    Bold, Italic, List, ListOrdered, Quote, Minus, Heading1, Heading2, Heading3, 
+    ArrowLeft, Save, Loader2, Briefcase, 
+    Bold, Italic, List, ListOrdered, Quote, Heading3, 
     Wrench, Clock
 } from "lucide-react";
 import Link from "next/link";
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
+// 1. Definisi Interface untuk Data Pengalaman
+interface ExperienceData {
+  id?: string;
+  job_title?: string;
+  company?: string;
+  description?: string;
+  start_date?: string;
+  end_date?: string;
+  is_current?: boolean;
+  skills?: string;
+}
 
 interface ExperienceFormProps {
-  initialData?: any;
+  initialData?: ExperienceData; // Ganti any ke ExperienceData
   action: (formData: FormData) => Promise<{ success: boolean; message: string }>;
   title: string;
 }
@@ -41,9 +52,7 @@ export default function ExperienceForm({ initialData, action, title }: Experienc
     setIsPending(true);
     const formData = new FormData(e.currentTarget);
     
-    // Append deskripsi dari Tiptap
     formData.append("description", editor.getHTML());
-    // Append status is_current karena checkbox perlu handling manual di FormData
     formData.set("is_current", String(isCurrent));
 
     if (initialData?.id) {
@@ -62,18 +71,14 @@ export default function ExperienceForm({ initialData, action, title }: Experienc
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 text-white animate-in fade-in duration-500 pb-20">
-      {/* --- HEADER --- */}
       <header className="flex flex-col gap-2">
         <Link href="/admin/experiences" className="flex items-center gap-2 text-zinc-500 hover:text-blue-400 text-sm w-fit transition-colors">
           <ArrowLeft size={16} /> Kembali ke Pengalaman
         </Link>
-        <h1 className="text-3xl font-bold">
-            {title}
-        </h1>
+        <h1 className="text-3xl font-bold">{title}</h1>
       </header>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* --- MAIN CONTENT (LEFT) --- */}
         <div className="lg:col-span-2 space-y-6 bg-white/[0.03] p-8 rounded-[2.5rem] border border-white/5 shadow-2xl backdrop-blur-sm">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input 
@@ -101,7 +106,6 @@ export default function ExperienceForm({ initialData, action, title }: Experienc
             </div>
             
             <div className="rounded-3xl border border-white/10 bg-zinc-950/50 overflow-hidden focus-within:ring-2 focus-within:ring-blue-500/30 transition-all">
-              {/* TOOLBAR */}
               <div className="flex flex-wrap items-center gap-1 p-3 border-b border-white/5 bg-white/[0.02]">
                 <ToolbarButton onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()} active={editor?.isActive('heading', { level: 3 })} icon={<Heading3 size={18} />} />
                 <div className="w-px h-6 bg-white/10 mx-1" />
@@ -113,9 +117,7 @@ export default function ExperienceForm({ initialData, action, title }: Experienc
                 <div className="w-px h-6 bg-white/10 mx-1" />
                 <ToolbarButton onClick={() => editor?.chain().focus().toggleBlockquote().run()} active={editor?.isActive('blockquote')} icon={<Quote size={18} />} />
               </div>
-
               <EditorContent editor={editor} />
-              
               <div className="px-4 py-2 border-t border-white/5 bg-white/[0.01] flex justify-end">
                 <span className="text-[10px] text-zinc-600 font-mono">
                   {editor?.storage.characterCount?.characters?.() || 0} characters
@@ -125,11 +127,8 @@ export default function ExperienceForm({ initialData, action, title }: Experienc
           </div>
         </div>
 
-        {/* --- SIDEBAR (RIGHT) --- */}
         <div className="space-y-6">
           <div className="bg-white/[0.03] p-8 rounded-[2.5rem] border border-white/5 space-y-6 shadow-2xl sticky top-6 backdrop-blur-sm">
-            
-            {/* DATE SECTION */}
             <div className="space-y-4">
                <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest ml-1">Timeline</label>
                
@@ -165,7 +164,6 @@ export default function ExperienceForm({ initialData, action, title }: Experienc
                )}
             </div>
 
-            {/* SKILLS SECTION */}
             <div className="space-y-2">
                 <Input 
                     label="Skills (Pisahkan dengan koma)" 
@@ -192,9 +190,15 @@ export default function ExperienceForm({ initialData, action, title }: Experienc
   );
 }
 
-// --- SUB-COMPONENTS ---
+// --- SUB-COMPONENTS DENGAN TIPE DATA SPESIFIK ---
 
-const ToolbarButton = ({ onClick, active, icon }: any) => (
+interface ToolbarButtonProps {
+  onClick: () => void;
+  active?: boolean;
+  icon: React.ReactNode;
+}
+
+const ToolbarButton = ({ onClick, active, icon }: ToolbarButtonProps) => (
   <button
     type="button"
     onClick={onClick}
@@ -204,7 +208,12 @@ const ToolbarButton = ({ onClick, active, icon }: any) => (
   </button>
 );
 
-const Input = ({ label, icon, ...props }: any) => (
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+  icon?: React.ReactNode;
+}
+
+const Input = ({ label, icon, ...props }: InputProps) => (
   <div className="space-y-1.5 w-full">
     <label className="text-[10px] font-bold text-zinc-500 ml-1 uppercase tracking-widest flex items-center gap-2">
         {icon} {label}

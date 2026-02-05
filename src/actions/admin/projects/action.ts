@@ -35,7 +35,7 @@ export async function createProject(formData: FormData) {
       const fileExt = imageFile.name.split('.').pop();
       const fileName = `${newId}-${Date.now()}.${fileExt}`;
       
-      const { data, error } = await supabase.storage
+      const { error } = await supabase.storage
         .from('kamingportfolio')
         .upload(fileName, imageFile);
 
@@ -71,9 +71,9 @@ export async function createProject(formData: FormData) {
     revalidatePath("/admin/projects");
     return { success: true, message: `Proyek ${newId} berhasil diterbitkan!` };
 
-  } catch (error: any) {
-    console.error("Create Error:", error);
-    return { success: false, message: error.message || "Gagal membuat proyek." };
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : "Gagal membuat proyek.";
+    return { success: false, message: errorMessage };
   }
 }
 
@@ -98,8 +98,9 @@ export async function deleteProject(id: string) {
 
     revalidatePath("/admin/projects");
     return { success: true, message: "Proyek berhasil dihapus." };
-  } catch (error: any) {
-    return { success: false, message: error.message };
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : "Gagal menghapus proyek.";
+    return { success: false, message: errorMessage };
   }
 }
 
@@ -211,8 +212,9 @@ export async function updateProject(formData: FormData) {
     revalidatePath("/admin/projects");
     return { success: true, message: "Proyek berhasil diperbarui!" };
 
-  } catch (error: any) {
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : "Gagal memperbarui proyek.";
     console.error("Update Error:", error);
-    return { success: false, message: error.message || "Gagal memperbarui proyek." };
+    return { success: false, message: errorMessage };
   }
 }

@@ -41,9 +41,8 @@ export async function loginAction(prevState: ActionState, formData: FormData) {
     // 3. Buat Session JWT & Simpan di Cookie
     await createSession(user.id.toString());
     
-  } catch (error) {
-    // Menangani error database atau server lainnya
-    return { message: "Terjadi kesalahan sistem. Coba lagi nanti." };
+  } catch {
+    return { message: "Terjadi kesalahan sistem. Coba lagi nanti",};
   }
 
   // 4. Redirect ke halaman tujuan (Harus di luar block try/catch)

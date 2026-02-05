@@ -1,6 +1,6 @@
 import { getAuth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { Users, ArrowLeft, UserPlus, Search, Shield, Mail, Lock, User as UserIcon } from "lucide-react";
+import { Users, ArrowLeft, UserPlus, Shield, Mail, Lock, User as UserIcon } from "lucide-react";
 import Link from "next/link";
 
 export default async function UsersPage() {

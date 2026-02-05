@@ -44,9 +44,9 @@ export async function createExperience(formData: FormData) {
     revalidatePath("/admin/experiences");
     return { success: true, message: `Pengalaman ${newId} berhasil diterbitkan!` };
 
-  } catch (error: any) {
-    console.error("Create Error:", error);
-    return { success: false, message: error.message || "Gagal membuat riwayat pengalaman." };
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : "Gagal membuat pengalaman.";
+    return { success: false, message: errorMessage };
   }
 }
 
@@ -74,9 +74,9 @@ export async function updateExperience(formData: FormData) {
     revalidatePath("/admin/experiences");
     return { success: true, message: "Pengalaman berhasil diperbarui!" };
 
-  } catch (error: any) {
-    console.error("Update Error:", error);
-    return { success: false, message: error.message || "Gagal memperbarui proyek." };
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : "Gagal memperbarui pengalaman.";
+    return { success: false, message: errorMessage };
   }
 }
 
@@ -87,8 +87,9 @@ export async function deleteExperience(id: string) {
 
     revalidatePath("/admin/experiences");
     return { success: true, message: "Pengalaman berhasil dihapus." };
-  } catch (error: any) {
-    return { success: false, message: error.message };
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : "Gagal menghapus proyek.";
+    return { success: false, message: errorMessage };
   }
 }
 
@@ -114,7 +115,6 @@ export async function getExperiences(page: number = 1, limit: number = 6) {
     };
 
   } catch (error) {
-    console.error("Action Error:", error);
-    return { success: false, message: "Gagal mengambil data", data: [], total: 0, totalPages: 0 };
+    return { success: false, message: "Gagal mengambil data",error: error, data: [], total: 0, totalPages: 0 };
   }
 }

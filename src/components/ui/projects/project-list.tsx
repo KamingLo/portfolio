@@ -2,7 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Github, Globe } from "lucide-react";
 
-export default function ProjectList({ projects }: { projects: any[] }) {
+interface Project {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  category: string;
+  image: string;
+  tags?: string[];
+  githubLink?: string;
+  liveDemo?: string;
+}
+
+export default function ProjectList({ projects }: { projects: Project[] }) {
   return (
     <div className="space-y-32 md:space-y-48">
       {projects.map((project, index) => (

@@ -5,7 +5,7 @@ import Image from "next/image";
 export const Hero = () => {
   return (
     // Tambahkan tap highlight transparent agar tidak ada kotak abu-abu saat klik di HP
-    <Section data-aos="fade-in"className="relative sm:mb-16 flex items-center justify-center [-webkit-tap-highlight-color:transparent]">
+    <Section data-aos="fade-in" className="relative sm:mb-16 flex items-center justify-center [-webkit-tap-highlight-color:transparent]">
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
         
         {/* Left Side: Content */}
@@ -23,9 +23,9 @@ export const Hero = () => {
           </h1>
           
           {/* Sub-headline */}
-          <p className="mt-6 max-w-xl text-lg md:text-xl text-zinc-500 font-medium leading-relaxed">
-            I'm Kaming Lo, a specialist in <span className="text-blue-400">Next.js</span> and <span className="text-zinc-300">Laravel</span> ecosystem. 
-            Fokus menciptakan aplikasi web yang skalabel, performa cepat, dan desain yang mengutamakan <span className="text-zinc-300">user experience</span>.
+          <p className="mt-6 max-w-xl text-lg md:text-xl text-gray-50 font-medium leading-relaxed">
+            Saya Kaming Lo, Fullstack Developer dengan Next.js dan Laravel. 
+            Fokus menciptakan aplikasi web yang skalabel, performa cepat, dan desain yang mengutamakan user experience.
           </p>
 
           {/* CTA Buttons - Mobile only */}

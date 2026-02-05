@@ -1,24 +1,34 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { createPortal } from "react-dom"; // Tambahkan ini
+import { useState, useEffect, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import { Trash2, Loader2, AlertTriangle } from "lucide-react";
 import { deleteProject } from "@/actions/admin/projects/action";
+
+// Helper untuk deteksi apakah kita sudah di Client (Hydrated)
+// Cara ini tidak memicu warning ESLint karena tidak menggunakan setState di useEffect
+const subscribe = () => () => {}; // No-op subscribe
+const getSnapshot = () => true;   // Di Client bernilai true
+const getServerSnapshot = () => false; // Di Server bernilai false
 
 export default function DeleteButton({ id, title }: { id: string; title: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
-  // Pastikan komponen sudah termount di client sebelum pakai Portal
+  // Hook resmi React untuk menggantikan logic "mounted"
+  const mounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+
+  // Efek untuk mengurus overflow body saja
   useEffect(() => {
-    setMounted(true);
     if (isOpen) {
-      document.body.style.overflow = "hidden"; // Lock scroll saat modal buka
+      document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
     }
-    return () => { document.body.style.overflow = "unset"; };
+    
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, [isOpen]);
 
   async function handleDelete() {
@@ -32,6 +42,9 @@ export default function DeleteButton({ id, title }: { id: string; title: string 
     }
   }
 
+  // Early return jika belum mounted (masih di server)
+  if (!mounted) return null;
+
   // Komponen Modal yang akan di-portal
   const ModalContent = (
     <div 
@@ -43,7 +56,6 @@ export default function DeleteButton({ id, title }: { id: string; title: string 
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex flex-col items-center text-center space-y-6">
-          {/* Icon Warning yang lebih bold */}
           <div className="p-6 bg-red-500/10 rounded-full text-red-500 animate-pulse">
             <AlertTriangle size={40} strokeWidth={2.5} />
           </div>
@@ -51,7 +63,7 @@ export default function DeleteButton({ id, title }: { id: string; title: string 
           <div className="space-y-3">
             <h3 className="text-2xl font-bold text-white ">Hapus Proyek?</h3>
             <p className="text-zinc-500 text-sm">
-              Kamu akan menghapus <span className="text-zinc-200 font-bold underline decoration-red-500/50">"{title}"</span> secara permanen dari database dan storage.
+              Kamu akan menghapus <span className="text-zinc-200 font-bold underline decoration-red-500/50">{title}</span> secara permanen dari database dan storage.
             </p>
           </div>
 
@@ -88,8 +100,7 @@ export default function DeleteButton({ id, title }: { id: string; title: string 
         <Trash2 size={18} />
       </button>
 
-      {/* Render modal menggunakan Portal agar tidak "ketimpa" */}
-      {isOpen && mounted && createPortal(ModalContent, document.body)}
+      {isOpen && createPortal(ModalContent, document.body)}
     </>
   );
 }

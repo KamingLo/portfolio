@@ -1,6 +1,7 @@
 import { getProjects } from "@/actions/admin/projects/action";
-import { ArrowLeft, Plus, ExternalLink, Github, Pencil, Eye, Image as ImageIcon } from "lucide-react";
+import { Plus, ExternalLink, Github, Pencil, Eye, Image as ImageIcon } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image"; // FIX: Import Image
 import DeleteButton from "@/components/ui/admin/projects/delete-button";
 import Pagination from "@/components/ui/admin/pagination";
 
@@ -34,7 +35,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
         </div>
       </div>
 
-      {/* --- CONTENT (Card on Mobile, Table on Desktop) --- */}
+      {/* --- CONTENT --- */}
       <div className="rounded-[2rem] bg-zinc-900/30 border border-zinc-800 overflow-hidden">
         
         {/* VIEW DESKTOP (Table) */}
@@ -56,7 +57,14 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
                       <div className="flex items-center gap-4">
                         <div className="h-12 w-16 rounded-xl bg-zinc-800 overflow-hidden border border-zinc-700 flex-shrink-0 relative">
                           {item.image ? (
-                            <img src={item.image} alt="" className="w-full h-full object-cover" />
+                            // FIX: Menggunakan Next.js Image
+                            <Image 
+                              src={item.image} 
+                              alt={item.title}
+                              fill
+                              sizes="80px"
+                              className="object-cover"
+                            />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center text-zinc-600"><ImageIcon size={20} /></div>
                           )}
@@ -67,6 +75,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
                         </div>
                       </div>
                     </td>
+                    {/* ... (Kolom Category & Links sama) ... */}
                     <td className="px-8 py-6">
                       <span className="text-[11px] font-bold text-blue-400 bg-blue-400/5 px-3 py-1.5 rounded-full border border-blue-400/10">
                         {item.category}
@@ -112,7 +121,14 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
                 <div className="flex gap-4">
                   <div className="h-16 w-20 rounded-2xl bg-zinc-800 overflow-hidden border border-zinc-700 relative flex-shrink-0">
                     {item.image ? (
-                      <img src={item.image} alt="" className="w-full h-full object-cover" />
+                      // FIX: Menggunakan Next.js Image
+                      <Image 
+                        src={item.image} 
+                        alt={item.title}
+                        fill
+                        sizes="100px"
+                        className="object-cover"
+                      />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-zinc-600"><ImageIcon size={20} /></div>
                     )}
@@ -123,7 +139,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
                     <p className="text-xs text-zinc-500 line-clamp-1">{item.subtitle}</p>
                   </div>
                 </div>
-
+                {/* ... (Footer Card Mobile sama) ... */}
                 <div className="flex items-center justify-between gap-4 pt-2">
                   <div className="flex gap-2">
                     <Link href={`/projects/${item.slug}`} target="_blank" className="p-3 bg-zinc-900 rounded-2xl text-zinc-400 active:scale-90 border border-zinc-800">
@@ -150,7 +166,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
         </div>
       </div>
 
-      {/* --- PAGINATION & INFO --- */}
+      {/* --- PAGINATION --- */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="text-[12px] text-zinc-600 font-bold">
           Showing {projects.length} of {response.total} projects

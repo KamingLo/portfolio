@@ -129,7 +129,7 @@ export default function LoginPage() {
 
                     <div className="text-center animate-in fade-in duration-700 delay-300">
                         <p className="text-zinc-600 text-sm font-medium">
-                            Don't have an account? <Link href="/contact" className="text-blue-500 hover:text-blue-400 transition-colors">Contact administrator</Link>
+                            Forgot Password? <Link href="/contact" className="text-blue-500 hover:text-blue-400 transition-colors">Contact administrator</Link>
                         </p>
                     </div>
                 </div>

@@ -1,7 +1,18 @@
-import { Calendar, Layers } from "lucide-react";
+import { Layers } from "lucide-react";
 import { format } from "date-fns";
 
-export default function ExperienceProjectStyle({ experiences }: { experiences: any[] }) {
+interface Experience {
+    id: string;
+    job_title: string;
+    start_date: string; // Assuming start_date is a string representing a date
+    end_date?: string; // Optional, assuming it may not be present for current jobs
+    is_current: boolean;
+    company: string;
+    description: string;
+    skills?: string; // Optional, assuming skills are a comma-separated string
+}
+
+export default function ExperienceProjectStyle({ experiences }: { experiences: Experience[] }) {
   return (
     <div className="relative max-w-5xl mx-auto px-4 py-20">
       
@@ -28,7 +39,7 @@ export default function ExperienceProjectStyle({ experiences }: { experiences: a
                   <span className="text-xs text-blue-500/80 font-bold flex items-center gap-2">
                     <Layers size={12} />
                     {/* Format: Jan 2024 — Present */}
-                    {format(new Date(exp.start_date), "MMM yyyy")} — {exp.is_current ? "Present" : format(new Date(exp.end_date), "MMM yyyy")}
+                    {format(new Date(exp.start_date), "MMM yyyy")} — {exp.is_current ? "Present" : format(new Date(exp.end_date!), "MMM yyyy")}
                   </span>
                 </div>
                 

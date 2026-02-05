@@ -12,7 +12,7 @@ export default function ContactPage() {
             <div className="inline-flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
               <span className="text-md text-blue-500 font-bold">
-                Let's work together
+                Let&apos;s work together
               </span>
             </div>
             <h2 className="text-5xl md:text-8xl font-bold text-white tracking-tight">

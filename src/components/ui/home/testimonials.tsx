@@ -43,7 +43,7 @@ export const Testimonials = () => (
               </div>
 
               <p className="text-2xl md:text-4xl text-white font-bold tracking-tight group-active:text-blue-500 transition-colors duration-300">
-                "Pengerjaan website SMK Pelita IV sangat rapi dan memperhatikan aspek SEO yang sangat membantu visibilitas sekolah kami."
+                &quot;Pengerjaan website SMK Pelita IV sangat rapi dan memperhatikan aspek SEO yang sangat membantu visibilitas sekolah kami.&quot;
               </p>
 
               <div className="flex items-center gap-5 pt-4">
