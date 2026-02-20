@@ -3,7 +3,10 @@ import ExperienceList from "@/components/ui/experiences/experience-list";
 import MainLayout from "@/components/layouts/main-layout";
 import Section from "@/components/layouts/sections";
 
+export const dynamic = 'force-dynamic';
+
 export default async function ExperiencePage() {
+    
   const { data: experiences } = await getPublicExperiences();
 
   // Pastikan data ada sebelum di-map

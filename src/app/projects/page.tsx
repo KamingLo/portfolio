@@ -3,7 +3,8 @@ import ProjectList from "@/components/ui/projects/project-list";
 import Link from "next/link";
 import MainLayout from "@/components/layouts/main-layout";
 import Section from "@/components/layouts/sections";
-// ... (import tetap sama)
+
+export const dynamic = 'force-dynamic';
 
 export default async function Page({ 
   searchParams 
