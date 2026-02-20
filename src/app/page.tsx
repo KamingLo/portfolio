@@ -7,6 +7,7 @@ import { Testimonials } from "@/components/ui/home/testimonials";
 import { FinalCTA } from "@/components/ui/home/cta";
 import AOSInit from "@/components/layouts/aos-init";
 
+export const revalidate = 3600;
 export default function Home() {
 
   return (
