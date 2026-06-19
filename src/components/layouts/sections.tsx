@@ -1,18 +1,21 @@
 // components/Section.tsx
-interface SectionProps {
-  children: React.ReactNode;
-  id?: string;
-  className?: string;
-}
+import { forwardRef } from "react";
 
-export default function Section({ children, id, className = "", ...props }: SectionProps) {
-  return (
-    <section 
-      id={id} 
-      className={`py-8 w-full px-0 md:px-12 lg:max-w-7xl lg:mx-auto mb-16 ${className}`}
-      {...props}
-    >
-      {children}
-    </section>
-  );
-}
+type SectionProps = React.ComponentPropsWithRef<"section">;
+
+const Section = forwardRef<HTMLOptionElement, SectionProps>(
+  ({ children, className = "", ...props }, ref) => {
+    return (
+      <section
+        ref={ref}
+        className={`py-6 w-full px-4 md:px-8 mb-8 ${className}`}
+        {...props}
+      >
+        {children}
+      </section>
+    );
+  }
+);
+
+Section.displayName = "Section";
+export default Section;
