@@ -1,82 +1,309 @@
 import MainLayout from "@/components/layouts/main-layout";
 import Section from "@/components/layouts/sections";
-import { TechStack }from "@/components/ui/home/tech-stack";
 import Image from "next/image";
+import Link from "next/link";
+import { TechStack } from "@/components/ui/home/tech-stack";
+import { ArrowUpRight, Github, Linkedin, MessageCircle, Mail } from "lucide-react";
+import {
+  siNextdotjs,
+  siLaravel,
+  siTailwindcss,
+  siReact,
+  siTypescript,
+  siGo,
+  siPython,
+  siPostgresql,
+  siMysql,
+  siDocker,
+  siUbuntu,
+  siGit,
+  siJavascript,
+  siPhp,
+} from "simple-icons";
+
+/* ─── DATA ───────────────────────────────────────────────────── */
+
+const skillCategories = [
+  {
+    title: "Frontend",
+    span: "col-span-1 md:col-span-2 md:row-span-2",
+    techs: [
+      { name: "Next.js", icon: siNextdotjs },
+      { name: "React", icon: siReact },
+      { name: "Tailwind CSS", icon: siTailwindcss },
+      { name: "TypeScript", icon: siTypescript },
+      { name: "JavaScript", icon: siJavascript },
+    ],
+  },
+  {
+    title: "Backend",
+    span: "col-span-1 md:col-span-1 md:row-span-2",
+    techs: [
+      { name: "Laravel", icon: siLaravel },
+      { name: "Go", icon: siGo },
+      { name: "PHP", icon: siPhp },
+    ],
+  },
+  {
+    title: "Language",
+    span: "col-span-1 md:col-span-1 md:row-span-1",
+    techs: [
+      { name: "Python", icon: siPython },
+      { name: "TypeScript", icon: siTypescript },
+    ],
+  },
+  {
+    title: "Database",
+    span: "col-span-1 md:col-span-1 md:row-span-1",
+    techs: [
+      { name: "PostgreSQL", icon: siPostgresql },
+      { name: "MySQL", icon: siMysql },
+    ],
+  },
+  {
+    title: "Infrastructure",
+    span: "col-span-1 md:col-span-2 md:row-span-1",
+    techs: [
+      { name: "Docker", icon: siDocker },
+      { name: "Ubuntu", icon: siUbuntu },
+      { name: "Git", icon: siGit },
+    ],
+  },
+];
+
+const socialLinks = [
+  { name: "GitHub", href: "https://github.com/kaminglo", icon: Github },
+  { name: "LinkedIn", href: "https://linkedin.com/in/kaming-lo", icon: Linkedin },
+  { name: "WhatsApp", href: "https://wa.me/6283835360789", icon: MessageCircle },
+];
+
+const contactCards = [
+  {
+    title: "WhatsApp",
+    description: "Respon cepat untuk diskusi proyek atau sekadar tanya-tanya.",
+    href: "https://wa.me/6283835360789",
+    icon: MessageCircle,
+    external: true,
+  },
+  {
+    title: "LinkedIn",
+    description: "Terhubung secara profesional dan lihat rekam jejak karir saya.",
+    href: "https://linkedin.com/in/kaming-lo",
+    icon: Linkedin,
+    external: true,
+  },
+  {
+    title: "Email",
+    description: "Kirim pesan langsung untuk diskusi lebih mendalam.",
+    href: "mailto:lokaming86@gmail.com",
+    icon: Mail,
+    external: false,
+  },
+];
+
+/* ─── PAGE ───────────────────────────────────────────────────── */
 
 export default function AboutPage() {
   return (
     <MainLayout>
-      <Section id="about-header" className="text-zinc-300">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24 gap-6 border-b border-white/5 pb-10">
-          <div className="space-y-3">
-            <div className="inline-flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-              <span className="text-md font-mono text-blue-500 font-semibold">
-                The person behind the products
-              </span>
-            </div>
-            <h2 className="text-5xl md:text-8xl font-bold text-white tracking-tighter">
-              About Me
-            </h2>
-          </div>
-          <p className="text-zinc-500 max-w-sm text-base md:text-lg font-medium leading-relaxed">
-            Membangun produk digital dengan presisi, edukasi, dan fokus pada skalabilitas.
+
+      {/* ━━━ SECTION 1 — HERO (Identitas Utama) ━━━━━━━━━━━━━━ */}
+      <Section id="about-hero" className="text-zinc-700">
+        <div className="flex flex-col items-center justify-center text-center pt-16 md:pt-32 pb-20 md:pb-40 space-y-8">
+          {/* Logo */}
+          <Image
+            src="/assets/image/logo-black.svg"
+            alt="Logo Kaming"
+            width={64}
+            height={64}
+            priority
+            className="opacity-90"
+          />
+
+          {/* Company Name */}
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-zinc-900 tracking-tight">
+            Kaming Lo.
+          </h1>
+
+          {/* Tagline */}
+          <p className="text-lg sm:text-xl md:text-2xl text-zinc-500 max-w-2xl leading-relaxed">
+            Membangun produk digital yang presisi melalui arsitektur yang bersih dan pengalaman pengguna yang bermakna.
           </p>
+
+          {/* Primary CTA */}
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-3 bg-zinc-900 text-white px-8 py-4 rounded-full font-bold text-base transition-all duration-300 hover:bg-blue-600 hover:gap-4 active:bg-blue-500 mt-4"
+          >
+            Mulai Proyek
+            <ArrowUpRight size={18} />
+          </Link>
         </div>
+      </Section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20">
-          <div className="lg:col-span-7 space-y-8 order-2 lg:order-1">
-            <h3 className="text-3xl md:text-5xl font-semibold text-white tracking-tight leading-tight">
-              Lebih dari sekadar coding, saya membangun solusi yang berkelanjutan.
-            </h3>
-            
-            <div className="space-y-6 text-zinc-400 text-lg md:text-xl font-normal leading-relaxed">
-              <p>
-                Melanjutkan apa yang saya sampaikan di awal: saya adalah <span className="text-white">Kaming Lo</span>. Perjalanan saya di dunia teknologi unik karena saya berdiri di dua sisi—sebagai pengembang aktif dan sebagai seorang pengajar. 
-              </p>
-              <p>
-                Sebagai spesialis di ekosistem <span className="text-blue-400 font-medium">Next.js</span> dan <span className="text-white font-medium">Laravel</span>, saya tidak hanya fokus pada &quot;asal jalan&quot;. Latar belakang saya sebagai pengajar menuntut saya untuk selalu menulis kode yang bersih, terdokumentasi, dan mudah dipahami—standar yang saya bawa ke setiap produk digital yang saya bangun.
-              </p>
-              <p>
-                Fokus utama saya saat ini adalah menciptakan aplikasi yang memiliki performa tinggi dan <span className="text-zinc-200">User Experience</span> yang mulus. Di luar itu, gairah saya pada analisis data dan pasar modal membantu saya melihat setiap proyek dari kacamata bisnis dan logika yang tajam.
-              </p>
-            </div>
+      {/* ━━━ SECTION 2 — PROFIL FOUNDER ━━━━━━━━━━━━━━━━━━━━━━ */}
+      <Section id="founder" className="text-zinc-700">
+        <div className="w-full h-px bg-zinc-200 mb-16 md:mb-24" />
 
-            <div className="relative p-10 rounded-4xl border border-white/10 bg-white/[0.02] overflow-hidden group transition-all hover:bg-white/[0.04]">
-               <div className="absolute top-0 left-0 w-1 h-full bg-blue-600 transition-all duration-500 group-hover:w-2" />
-               <p className="text-white text-xl md:text-2xl font-medium italic">
-                 &quot;Bagi saya, arsitektur website yang baik adalah fondasi dari pengalaman pengguna yang luar biasa.&quot;
-               </p>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-20 items-center">
+          {/* Foto */}
+          <div className="md:col-span-5 flex justify-center md:justify-start">
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-3xl overflow-hidden border border-zinc-200 shadow-lg">
+              <Image
+                src="/assets/image/kaming.webp"
+                alt="Kaming Lo"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 256px, 320px"
+              />
             </div>
           </div>
 
-          <div className="lg:col-span-5 space-y-8 order-1 lg:order-2">
-             <div className="relative aspect-[4/5] overflow-hidden rounded-[3rem] border border-white/20 bg-zinc-900 group shadow-2xl">
-                <Image 
-                  src="/assets/image/kaming.webp"
-                  alt="Kaming Lo - Full-stack Developer"
-                  fill
-                  priority
-                  className="object-cover transition-all duration-700 grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-105"
-                />
-                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-600/20 blur-[80px] -z-10" />
-             </div>
+          {/* Teks */}
+          <div className="md:col-span-7 space-y-6 text-center md:text-left">
+            <div className="space-y-2">
+              <h2 className="text-3xl md:text-5xl font-bold text-zinc-900 tracking-tight">
+                Kaming Lo
+              </h2>
+              <p className="text-lg md:text-xl text-blue-600 font-semibold">
+                Full-stack Developer & Educator
+              </p>
+            </div>
 
-             <div className="grid grid-cols-2 gap-4">
-                <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.01]">
-                   <span className="text-blue-500 font-mono text-md block mb-1">Main Interest</span>
-                   <span className="text-white font-medium text-md">Web-development</span>
-                </div>
-                <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.01]">
-                   <span className="text-blue-500 font-mono text-md block mb-1">Philosophy</span>
-                   <span className="text-white font-medium text-md">Always Learn</span>
-                </div>
-             </div>
+            <p className="text-base md:text-lg text-zinc-500 max-w-xl leading-relaxed">
+              Saya mendirikan praktik pengembangan ini dengan satu keyakinan: fondasi kode yang bersih adalah bentuk tanggung jawab profesional tertinggi. Berdiri di persimpangan antara pengembangan perangkat lunak dan edukasi, saya mengkhususkan diri pada ekosistem Next.js dan Laravel untuk merancang sistem yang stabil, mudah dibaca, dan siap untuk skala esok hari.
+            </p>
+
+            {/* Social Icons */}
+            <div className="flex items-center justify-center md:justify-start gap-4 pt-2">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.name}
+                  className="group flex items-center justify-center w-12 h-12 rounded-full border border-zinc-200 text-zinc-400 hover:text-blue-600 hover:border-blue-300 active:bg-blue-50 transition-all duration-300"
+                >
+                  <link.icon size={20} className="transition-transform group-hover:-translate-y-0.5" />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </Section>
 
-      <TechStack />
+      {/* ━━━ SECTION 3 — AREA KEAHLIAN (Bento Box) ━━━━━━━━━━━ */}
+      <Section id="skills" className="text-zinc-700">
+        <div className="w-full h-px bg-zinc-200 my-16 md:my-24" />
+
+        {/* Header */}
+        <div className="text-center mb-12 md:mb-20 space-y-3">
+          <span className="text-sm text-blue-600 font-bold uppercase tracking-wider">
+            Keahlian Teknis
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold text-zinc-900 tracking-tight">
+            Area Keahlian
+          </h2>
+          <p className="text-zinc-400 max-w-lg mx-auto text-base">
+            Teknologi yang saya kuasai untuk membangun produk berkualitas tinggi.
+          </p>
+        </div>
+
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-6 auto-rows-auto">
+          {skillCategories.map((cat, idx) => (
+            <div
+              key={idx}
+              className={`${cat.span} group rounded-2xl border border-zinc-200 bg-zinc-50/80 p-6 md:p-8 transition-all duration-300 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/5`}
+            >
+              {/* Category Title */}
+              <h3 className="text-sm font-bold text-zinc-400 uppercase tracking-wider mb-6">
+                {cat.title}
+              </h3>
+
+              {/* Tech Items */}
+              <div className="flex flex-wrap gap-3">
+                {cat.techs.map((tech, i) => (
+                  <div
+                    key={i}
+                    style={{ ["--brand-color" as string]: `#${tech.icon.hex}` }}
+                    className="flex items-center gap-3 bg-white border border-zinc-100 rounded-xl px-4 py-3 transition-all duration-300 hover:border-[var(--brand-color)] hover:shadow-md"
+                  >
+                    <svg
+                      role="img"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-5 h-5 fill-zinc-400 group-hover:fill-[var(--brand-color)] transition-colors duration-300"
+                    >
+                      <title>{tech.name}</title>
+                      <path d={tech.icon.path} />
+                    </svg>
+                    <span className="text-sm font-semibold text-zinc-600">
+                      {tech.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* ━━━ SECTION 4 — LAYANAN UTAMA (TechStack) ━━━━━━━━━━━ */}
+      <div className="mt-16 md:mt-24">
+        <TechStack />
+      </div>
+
+      {/* ━━━ SECTION 5 — AREA KONTAK ━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+      <Section id="about-contact" className="text-zinc-700 [-webkit-tap-highlight-color:transparent]">
+        <div className="w-full h-px bg-zinc-200 my-16 md:my-24" />
+
+        {/* Header */}
+        <div className="text-center mb-12 md:mb-16 space-y-3">
+          <span className="text-sm text-blue-600 font-bold uppercase tracking-wider">
+            Hubungi Saya
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold text-zinc-900 tracking-tight">
+            Mari Terhubung
+          </h2>
+        </div>
+
+        {/* Contact Cards — mobile: vertical centered, desktop: horizontal spread */}
+        <div className="flex flex-col md:flex-row items-center md:items-stretch md:justify-between gap-6">
+          {contactCards.map((card) => {
+            const Tag = card.external ? "a" : Link;
+            const externalProps = card.external
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {};
+
+            return (
+              <Tag
+                key={card.title}
+                href={card.href}
+                {...externalProps}
+                className="group relative w-full md:flex-1 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 p-8 transition-all duration-300 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/5 active:border-blue-500 active:bg-blue-50"
+              >
+                <div className="relative z-10 flex flex-col items-center md:items-start text-center md:text-left gap-5">
+                  <div className="bg-zinc-100 w-14 h-14 rounded-2xl flex items-center justify-center text-zinc-400 group-hover:text-blue-600 border border-zinc-200 transition-colors duration-300">
+                    <card.icon size={28} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-zinc-900 mb-1 group-active:text-blue-600 transition-colors">
+                      {card.title}
+                    </h3>
+                    <p className="text-zinc-400 text-sm leading-relaxed">
+                      {card.description}
+                    </p>
+                  </div>
+                </div>
+                <ArrowUpRight className="absolute top-8 right-8 text-zinc-300 group-hover:text-blue-500 transition-all group-hover:rotate-45" />
+              </Tag>
+            );
+          })}
+        </div>
+      </Section>
+
     </MainLayout>
   );
 }

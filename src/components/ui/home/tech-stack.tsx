@@ -1,81 +1,101 @@
-import { Layers, Database, Code2, CheckCircle2 } from "lucide-react";
 import Section from "@/components/layouts/sections";
+import {
+  siNextdotjs,
+  siGo,
+  siTailwindcss,
+  siLaravel,
+  siPostgresql,
+  siPython,
+  siDocker,
+  siUbuntu
+} from "simple-icons";
 
-const Stacks = [
-  { 
-    title: "Frontend", 
-    icon: Layers, 
-    techs: ["Next.js / React", "Tailwind CSS", "Flutter"],
-    description: "Membangun antarmuka yang responsif dan interaktif."
+const StackCategories = [
+  {
+    title: "Development",
+    description: "Alat utama untuk membangun ekosistem dan logika aplikasi.",
+    logos: [
+      { name: "Next.js", icon: siNextdotjs },
+      { name: "Tailwind", icon: siTailwindcss },
+      { name: "Laravel", icon: siLaravel },
+      { name: "Go", icon: siGo },
+      { name: "Python", icon: siPython },
+      { name: "PostgreSQL", icon: siPostgresql },
+    ]
   },
-  { 
-    title: "Backend", 
-    icon: Database, 
-    techs: ["Laravel / PHP", "Node.js / Express", "PostgreSQL / MongoDB"],
-    description: "Arsitektur server yang aman dan database teroptimasi."
-  },
-  { 
-    title: "Infrastructure", 
-    icon: Code2, 
-    techs: ["Ubuntu Server", "Git / GitHub", "Python (Data analysis)"],
-    description: "Deployment yang efisien dan analisis data teknis."
+  {
+    title: "Infrastructure",
+    description: "Sistem dan kontainer untuk pengelolaan server aplikasi.",
+    logos: [
+      { name: "Docker", icon: siDocker },
+      { name: "Ubuntu", icon: siUbuntu },
+    ]
   }
 ];
 
 export const TechStack = () => (
-  <Section id="stack" data-aos="fade-in" className="text-zinc-300 [-webkit-tap-highlight-color:transparent]">
-    <div className="max-w-7xl mx-auto">
+  <Section id="stack" data-aos="fade-in" className="text-zinc-700">
+    <div className="max-w-7xl mx-auto py-12 md:py-20 px-6">
+      
       {/* --- HEADER SECTION --- */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24 gap-6 border-b border-white/5 pb-10">
-        <div className="space-y-3">
-          <div className="inline-flex items-center gap-2">
-            <span className="text-sm text-blue-500 font-bold">
-              Software engine
-            </span>
-          </div>
-          <h2 className="text-5xl md:text-8xl font-bold text-white tracking-tight">
-            Tech stack
-          </h2>
-        </div>
-        <p className="text-zinc-500 max-w-sm text-base md:text-lg font-medium">
+      <div className="flex flex-col items-center justify-center text-center mb-16 md:mb-24 space-y-4 border-b border-zinc-100 pb-10">
+        <span className="text-sm text-blue-500 font-bold uppercase">
+          Software engine
+        </span>
+        <h2 className="text-4xl md:text-6xl font-bold text-zinc-900">
+          Tech stack
+        </h2>
+        <p className="text-zinc-500 max-w-lg text-base md:text-lg">
           Teknologi pilihan untuk membangun produk yang skalabel dan berperforma tinggi.
         </p>
       </div>
 
-      {/* --- GRID DISPLAY --- */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-        {Stacks.map((stack, i) => (
-          <div 
-            key={i} 
-            className="group relative p-10 md:p-14 rounded-[2.5rem] border border-white/5 bg-white/[0.02] backdrop-blur-sm transition-all duration-200 hover:border-blue-500/20 active:border-blue-500 active:bg-blue-500/5"
-          >
-            {/* Subtle Gradient Glow */}
-            <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+      {/* --- DASHBOARD LAYOUT SECTION --- */}
+      <div className="flex flex-col gap-16 md:gap-24">
+        {StackCategories.map((category, idx) => (
+          <div key={idx} className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
             
-            <div className="relative z-10">
-              <stack.icon className="w-14 h-14 mb-10 text-zinc-700 group-hover:text-blue-500 group-active:text-blue-500 transition-colors duration-300" />
-              
-              <div className="space-y-4 mb-10">
-                <h4 className="text-3xl md:text-4xl font-bold text-white group-active:text-blue-500 transition-colors">
-                  {stack.title}
-                </h4>
-                <p className="text-zinc-500 text-base font-normal group-hover:text-zinc-400 transition-colors">
-                  {stack.description}
-                </p>
-              </div>
-
-              <ul className="space-y-5">
-                {stack.techs.map((t, idx) => (
-                  <li key={idx} className="flex items-center gap-4 text-zinc-400 group-hover:text-zinc-200 group-active:text-zinc-200 transition-colors text-lg md:text-xl font-medium">
-                    <CheckCircle2 size={20} className="text-zinc-800 group-hover:text-blue-500 group-active:text-blue-500 transition-colors duration-300" /> 
-                    {t}
-                  </li>
-                ))}
-              </ul>
+            {/* Sisi Kiri: Informasi Kategori */}
+            <div className="md:w-1/3 space-y-3 md:sticky md:top-32">
+              <h3 className="text-2xl md:text-3xl font-bold text-zinc-900">
+                {category.title}
+              </h3>
+              <p className="text-zinc-500 text-sm md:text-base">
+                {category.description}
+              </p>
             </div>
+
+            {/* Sisi Kanan: Daftar Teknologi (Pill Cards) */}
+            <div className="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 w-full">
+              {category.logos.map((logo, index) => (
+                <div 
+                  key={index}
+                  style={{ ["--brand-color" as string]: `#${logo.icon.hex}` }}
+                  className="group flex items-center gap-5 p-6 border border-zinc-200 transition-all duration-300 hover:border-[var(--brand-color)] hover:-translate-y-1 cursor-pointer"
+                >
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full border border-zinc-200 group-hover:bg-[var(--brand-color)]/10 transition-colors duration-300">
+                    <svg
+                      role="img"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-6 h-6 fill-zinc-400 group-hover:fill-[var(--brand-color)] transition-colors duration-300"
+                    >
+                      <title>{logo.name}</title>
+                      <path d={logo.icon.path} />
+                    </svg>
+                  </div>
+                  
+                  <span className="text-base md:text-lg font-bold text-zinc-600 group-hover:text-zinc-900 transition-colors duration-300">
+                    {logo.name}
+                  </span>
+                </div>
+              ))}
+            </div>
+
           </div>
         ))}
       </div>
+
     </div>
   </Section>
 );

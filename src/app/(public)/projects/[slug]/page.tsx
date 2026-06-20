@@ -13,13 +13,13 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
   return (
     <MainLayout>
-      <article className="min-h-screen text-white pb-32">
+      <article className="min-h-screen text-zinc-900 pb-32">
         
         {/* Navigation - Minimalist */}
-        <nav className="py-6 border-b border-white/10 mb-12">
+        <nav className="py-6 border-b border-zinc-200 mb-12">
           <Link 
             href="/projects" 
-            className="group flex items-center gap-2 text-zinc-500 hover:text-white transition-all text-xs tracking-widest uppercase w-fit"
+            className="group flex items-center gap-2 text-zinc-500 hover:text-zinc-900 transition-all text-xs tracking-widest uppercase w-fit"
           >
             <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" /> 
             Back to Projects
@@ -27,10 +27,10 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         </nav>
 
         {/* SECTION 1: [FOTO 16/9] & [DETAIL SIDEBAR] */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 mb-16 border-b border-white/10 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 mb-16 border-b border-zinc-200 pb-16">
           {/* Square Image Container */}
-          <div className="lg:col-span-9 border-r border-white/10 pr-0 lg:pr-8">
-            <div className="relative aspect-video w-full overflow-hidden bg-zinc-900">
+          <div className="lg:col-span-9 border-r border-zinc-200 pr-0 lg:pr-8">
+            <div className="relative aspect-video w-full overflow-hidden bg-zinc-100">
               <Image 
                 src={project.image} 
                 alt={project.title} 
@@ -50,7 +50,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       <span className="text-zinc-500 text-xs tracking-widest font-medium mb-3 block">
         Category
       </span>
-      <p className="text-4xl md:text-5xl lg:text-5xl font-medium text-zinc-100 tracking-tight leading-none">
+      <p className="text-4xl md:text-5xl lg:text-5xl font-medium text-zinc-800 tracking-tight leading-none">
         {project.category}
       </p>
     </div>
@@ -64,7 +64,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         {project.tags.map((tag, i) => (
           <span 
             key={i} 
-            className="text-2xl md:text-3xl lg:text-3xl text-zinc-400 font-light tracking-tighter border-b border-white/10 pb-2 w-full hover:text-white transition-colors"
+            className="text-2xl md:text-3xl lg:text-3xl text-zinc-400 font-light tracking-tighter border-b border-zinc-200 pb-2 w-full hover:text-zinc-900 transition-colors"
           >
             {tag}
           </span>
@@ -74,13 +74,13 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   </div>
 
   {/* Action Links - Tall & Sharp */}
-  <div className="flex border-t-2 border-white/10 mt-20">
+  <div className="flex border-t-2 border-zinc-200 mt-20">
     {project.githubLink && (
       <a 
         href={project.githubLink} 
         target="_blank" 
         rel="noopener noreferrer" 
-        className="flex-1 flex items-center justify-center py-10 border-r-2 border-white/10 hover:bg-white hover:text-black transition-all group"
+        className="flex-1 flex items-center justify-center py-10 border-r-2 border-zinc-200 hover:bg-zinc-900 hover:text-white transition-all group"
       >
         <span className="mr-3 text-sm font-medium hidden md:block">GitHub</span>
         <Github size={24} />
@@ -91,7 +91,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         href={project.liveDemo} 
         target="_blank" 
         rel="noopener noreferrer"
-        className="flex-1 flex items-center justify-center py-10 hover:bg-white hover:text-black transition-all group"
+        className="flex-1 flex items-center justify-center py-10 hover:bg-zinc-900 hover:text-white transition-all group"
       >
         <span className="mr-3 text-sm font-medium hidden md:block">Live Demo</span>
         <Globe size={24} />
@@ -102,7 +102,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         </div>
 
         {/* SECTION 2: [TITLE & SUBTITLE] */}
-        <section className="mb-16 border-b border-white/10 pb-16">
+        <section className="mb-16 border-b border-zinc-200 pb-16">
           <div className="max-w-6xl">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-light mb-6">
               {project.title}

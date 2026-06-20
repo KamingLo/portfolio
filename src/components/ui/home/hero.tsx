@@ -60,7 +60,7 @@ export const Hero = () => {
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 pt-8 pb-8 text-center">
         {/* Headline */}
         <h1
-          className="max-w-4xl text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight"
+          className="max-w-4xl text-zinc-900 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight"
           data-aos="fade-up"
         >
           Full-stack Developer.
@@ -69,7 +69,7 @@ export const Hero = () => {
         {/* Sub-headline */}
         <p
           className="mt-5 max-w-3xl text-xl sm:text-2xl md:text-3xl font-medium leading-relaxed"
-          style={{ color: "rgba(160, 170, 190, 0.85)" }}
+          style={{ color: "rgba(100, 116, 139, 0.85)" }}
           data-aos="fade-up"
           data-aos-delay="100"
         >
@@ -97,7 +97,7 @@ export const Hero = () => {
           data-aos="fade-up"
           data-aos-delay="400"
         >
-          <ChevronDown size={24} className="text-white/40" />
+          <ChevronDown size={24} className="text-zinc-300" />
         </div>
       </div>
 
@@ -123,7 +123,7 @@ export const Hero = () => {
       </div>
 
       {/* Background Ambient Glow */}
-      <div className="absolute top-1/4 left-1/2 -z-20 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600/5 blur-[160px]" />
+      <div className="absolute top-1/4 left-1/2 -z-20 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/5 blur-[160px]" />
     </Section>
   );
 };

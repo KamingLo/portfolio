@@ -29,7 +29,7 @@ export default async function ExperiencePage() {
       <Section>
         <div className="mb-20 space-y-4">
           <h2 className="text-md font-mono text-blue-500">Professional Journey</h2>
-          <h1 className="text-5xl md:text-7xl font-semibold text-white">Experiences</h1>
+          <h1 className="text-5xl md:text-7xl font-semibold text-zinc-900">Experiences</h1>
         </div>
 
         {/* Kirim data yang sudah di-format */}

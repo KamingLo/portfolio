@@ -38,22 +38,22 @@ export const Navbar = () => {
                     <Link href="/" className="pl-4 transition-opacity duration-200 active:opacity-70">
                         <div className="flex items-center gap-3">
                             <Image
-                                src="/assets/image/logo-white.svg"
+                                src="/assets/image/logo-black.svg"
                                 alt="Logo"
                                 width={40}
                                 height={40}
                                 priority
                             />
-                            <span className="text-white font-semibold text-lg tracking-tight">Kaming</span>
+                            <span className="text-zinc-900 font-semibold text-lg tracking-tight">Kaming</span>
                         </div>
                     </Link>
 
-                    <ul className="hidden gap-2 text-md font-medium text-zinc-400 md:flex">
+                    <ul className="hidden gap-2 text-md font-medium text-zinc-500 md:flex">
                         {navLinks.map((link) => (
                             <li key={link.name}>
                                 <Link 
                                     href={link.href} 
-                                    className="px-4 py-2 transition-all duration-200 hover:text-white rounded-full active:text-blue-500 active:bg-blue-500/5"
+                                    className="px-4 py-2 transition-all duration-200 hover:text-zinc-900 rounded-full active:text-blue-500 active:bg-blue-500/5"
                                 >
                                     {link.name}
                                 </Link>
@@ -62,13 +62,13 @@ export const Navbar = () => {
                     </ul>
 
                     <div className="flex items-center gap-2">
-                        <Link href={"/contact"} className="hidden md:flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-bold text-black active:bg-blue-500 active:text-white transition-all">
+                        <Link href={"/contact"} className="hidden md:flex items-center gap-2 rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-bold text-white active:bg-blue-500 active:text-white transition-all">
                             Let&apos;s talk
                             <ArrowUpRight size={16} />
                         </Link>
                         
                         <button 
-                            className="md:hidden flex h-12 w-12 items-center justify-center rounded-full text-white transition-colors active:text-blue-500"
+                            className="md:hidden flex h-12 w-12 items-center justify-center rounded-full text-zinc-900 transition-colors active:text-blue-500"
                             onClick={() => setIsOpen(!isOpen)}
                         >
                             {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -79,7 +79,7 @@ export const Navbar = () => {
 
             {/* FULL SCREEN MOBILE OVERLAY */}
             <div 
-                className={`fixed inset-0 z-[200] bg-black/70 backdrop-blur-2xl transition-all duration-500 ease-in-out md:hidden ${
+                className={`fixed inset-0 z-[200] bg-white/95 backdrop-blur-2xl transition-all duration-500 ease-in-out md:hidden ${
                     isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
                 }`}
             >
@@ -98,7 +98,7 @@ export const Navbar = () => {
                                 <Link
                                     href={link.href}
                                     onClick={() => delayNavigation()}
-                                    className="flex items-center justify-between text-4xl font-bold text-white border-b border-white/10 pb-5 transition-all duration-200 active:text-blue-500 active:border-blue-500/50"
+                                    className="flex items-center justify-between text-4xl font-bold text-zinc-900 border-b border-zinc-200 pb-5 transition-all duration-200 active:text-blue-500 active:border-blue-500/50"
                                 >
                                     {link.name}
                                     <ArrowUpRight size={28} className='text-blue-500/70'/>
@@ -115,7 +115,7 @@ export const Navbar = () => {
                     >
                         <div className="space-y-2">
                             <span className="text-[10px] font-bold text-zinc-500 block uppercase tracking-widest">Get in touch</span>
-                            <Link href="mailto:lokaming86@gmail.com" className="text-xl font-bold text-white active:text-blue-500">
+                            <Link href="mailto:lokaming86@gmail.com" className="text-xl font-bold text-zinc-900 active:text-blue-500">
                                 lokaming86@gmail.com
                             </Link>
                         </div>

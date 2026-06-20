@@ -31,7 +31,7 @@ export default async function Page({
       <Section>
         <div className="mb-20 space-y-4">
           <h2 className="text-md font-mono text-blue-500 tracking-[0.2em]">My Archive</h2>
-          <h1 className="text-5xl md:text-7xl font-medium text-white tracking-tighter uppercase">Projects</h1>
+          <h1 className="text-5xl md:text-7xl font-medium text-zinc-900 tracking-tighter uppercase">Projects</h1>
         </div>
 
         {/* Kirim data yang sudah di-format, bukan data mentah dari Prisma */}
@@ -39,7 +39,7 @@ export default async function Page({
 
         {/* SECTION: [PAGINATION CENTERED] */}
         {metadata.totalPages > 1 && (
-          <nav className="mt-48 border-t border-white/10 pt-20 flex justify-center items-center gap-10 md:gap-20">
+          <nav className="mt-48 border-t border-zinc-200 pt-20 flex justify-center items-center gap-10 md:gap-20">
             {[...Array(metadata.totalPages)].map((_, i) => {
               const pageNum = i + 1;
               const isActive = currentPage === pageNum;
@@ -51,7 +51,7 @@ export default async function Page({
                   className={`transition-all duration-500 ease-in-out select-none ${
                     isActive 
                     ? "text-4xl md:text-4xl text-blue-500 font-bold leading-none tracking-tighter" 
-                    : "text-2xl md:text-2xl text-zinc-800 hover:text-zinc-500 font-light leading-none"
+                    : "text-2xl md:text-2xl text-zinc-300 hover:text-zinc-500 font-light leading-none"
                   }`}
                 >
                   {pageNum < 10 ? `0${pageNum}` : pageNum}
