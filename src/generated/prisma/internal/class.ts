@@ -34,6 +34,10 @@ const config: runtime.GetPrismaClientConfig = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -56,8 +60,8 @@ const config: runtime.GetPrismaClientConfig = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\" // untuk MariaDB\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       String  @id @unique\n  email    String  @unique\n  name     String?\n  password String\n}\n\nmodel Project {\n  id          String   @id @unique\n  title       String\n  subtitle    String\n  image       String\n  description String   @db.Text\n  explanation String?  @db.Text\n  category    String\n  tags        String[]\n  githubLink  String?\n  liveDemo    String?\n  slug        String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n}\n\nmodel Experience {\n  id          String @id @unique\n  job_title   String\n  description String @db.Text\n  skills      String\n  company     String\n\n  is_current Boolean   @default(false)\n  start_date DateTime\n  end_date   DateTime?\n\n  created_at DateTime @default(now())\n  updated_at DateTime @updatedAt\n}\n",
-  "inlineSchemaHash": "178e8a492d2fddee3024982f02c9fb0d56030fce52e2fe481f9b4a7d459b511b",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client\"\n  output        = \"../src/generated/prisma\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\" // untuk MariaDB\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       String  @id @unique\n  email    String  @unique\n  name     String?\n  password String\n}\n\nmodel Project {\n  id          String   @id @unique\n  title       String\n  subtitle    String\n  image       String\n  description String   @db.Text\n  explanation String?  @db.Text\n  category    String\n  tags        String[]\n  githubLink  String?\n  liveDemo    String?\n  slug        String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n}\n\nmodel Experience {\n  id          String @id @unique\n  job_title   String\n  description String @db.Text\n  skills      String\n  company     String\n\n  is_current Boolean   @default(false)\n  start_date DateTime\n  end_date   DateTime?\n\n  created_at DateTime @default(now())\n  updated_at DateTime @updatedAt\n}\n",
+  "inlineSchemaHash": "394b05b9c8193aa4548790365ca5882a06b1bc80110994d3ce56f0a1138e03d0",
   "copyEngine": true,
   "runtimeDataModel": {
     "models": {},
