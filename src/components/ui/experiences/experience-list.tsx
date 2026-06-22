@@ -1,4 +1,3 @@
-import { Layers } from "lucide-react";
 import { format } from "date-fns";
 
 interface Experience {
@@ -12,73 +11,52 @@ interface Experience {
     skills?: string;
 }
 
-export default function ExperienceProjectStyle({ experiences }: { experiences: Experience[] }) {
+export default function ExperienceList({ experiences }: { experiences: Experience[] }) {
   return (
-    <div className="relative max-w-5xl mx-auto py-12 md:py-20">
-      
-      {/* 1. Garis Backbone Vertikal - Digeser ke kiri banget kalau di mobile agar hemat tempat */}
-      <div className="absolute top-0 bottom-0 w-px border-l border-dashed border-zinc-300 z-0" />
+    <div className="py-16 md:py-24 space-y-16 md:space-y-24">
+      {experiences.map((exp) => (
+        <div 
+          key={exp.id} 
+          className="group flex flex-col md:flex-row gap-6 md:gap-16 items-start"
+        >
+          {/* Left Column - Date & Company */}
+          <div className="w-full md:w-1/4 flex flex-col space-y-2 shrink-0 md:pt-1">
+            <span className="text-sm font-semibold text-blue-600 tracking-wider uppercase">
+              {format(new Date(exp.start_date), "MMM yyyy")} — {exp.is_current ? "Present" : exp.end_date ? format(new Date(exp.end_date), "MMM yyyy") : ""}
+            </span>
+            <span className="text-xl md:text-2xl font-semibold text-zinc-900">
+              {exp.company}
+            </span>
+          </div>
 
-      <div className="space-y-20 md:space-y-48">
-        {experiences.map((exp, index) => (
-          <div 
-            key={exp.id} 
-            className="relative pl-8 md:pl-24 group flex flex-col items-start"
-          >
+          {/* Right Column - Role & Description */}
+          <div className="w-full md:w-3/4 space-y-6">
+            <h3 className="text-2xl md:text-4xl font-semibold text-zinc-900 group-hover:text-blue-600 transition-colors">
+              {exp.job_title}
+            </h3>
             
-            {/* Tanda Titik pada Garis Backbone */}
-            <div className="absolute left-[-5px] md:left-[-5px] top-1 w-[11px] h-[11px] rounded-full bg-white border border-zinc-300 group-hover:border-blue-500 transition-colors duration-500 z-10" />
+            {/* Description */}
+            <div 
+              className="text-zinc-500 text-base md:text-lg leading-relaxed max-w-3xl prose prose-zinc prose-p:my-2 prose-ul:my-2 prose-li:my-1"
+              dangerouslySetInnerHTML={{ __html: exp.description }}
+            />
 
-            {/* Sisi Teks */}
-            <div className="w-full space-y-6 md:space-y-8">
-              <div className="space-y-4 md:space-y-6">
-                
-                {/* --- METADATA BAR --- */}
-                <div className="flex items-center gap-3 md:gap-4">
-                  <span className="text-[10px] md:text-xs text-zinc-600 whitespace-nowrap">
-                    NO. {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <div className="h-[1px] flex-1 bg-zinc-200 group-hover:bg-blue-500/30 transition-all duration-700" />
-                  <span className="text-[10px] md:text-xs text-blue-500/80 font-bold flex items-center gap-1.5 whitespace-nowrap">
-                    <Layers size={10} className="md:w-3 md:h-3" />
-                    {format(new Date(exp.start_date), "MMM yyyy")} — {exp.is_current ? "Present" : exp.end_date ? format(new Date(exp.end_date), "MMM yyyy") : ""}
-                  </span>
-                </div>
-                
-                {/* --- TITLE & COMPANY --- */}
-                <div className="space-y-2 md:space-y-3">
-                  {/* Ukuran font dikurangi untuk mobile (text-2xl/3xl) agar tidak pecah baris terlalu ekstrem */}
-                  <h3 className="text-2xl sm:text-3xl md:text-7xl font-bold text-zinc-900 group-hover:text-blue-400 transition-colors duration-500 leading-tight">
-                    {exp.job_title}
-                  </h3>
-                  <p className="text-base md:text-2xl text-zinc-500 font-medium">
-                    at <span className="text-zinc-700">{exp.company}</span>
-                  </p>
-                </div>
-
-                {/* --- DESCRIPTION --- */}
-                {/* max-w-full di mobile agar teks memenuhi layar */}
-                <div 
-                  className="text-zinc-500 text-sm md:text-xl font-normal max-w-full md:max-w-3xl prose prose-xs md:prose-base leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: exp.description }}
-                />
-              </div>
-
-              {/* --- TECH TAGS --- */}
-              <div className="flex flex-wrap gap-2">
-                {exp.skills?.split(",").map((skill: string) => (
+            {/* Tech Tags */}
+            {exp.skills && (
+              <div className="flex flex-wrap gap-2 pt-2">
+                {exp.skills.split(",").map((skill: string) => (
                   <span 
                     key={skill} 
-                    className="text-[10px] md:text-sm border border-zinc-200 bg-zinc-50 px-3 py-1 md:px-5 md:py-2 rounded-full text-zinc-500 group-hover:text-zinc-700 group-hover:border-blue-500/20 transition-all duration-500"
+                    className="text-xs md:text-sm font-semibold border border-zinc-200 px-3 py-1.5 text-zinc-500 hover:border-blue-300 hover:text-blue-600 transition-colors"
                   >
                     {skill.trim()}
                   </span>
                 ))}
               </div>
-            </div>
+            )}
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }

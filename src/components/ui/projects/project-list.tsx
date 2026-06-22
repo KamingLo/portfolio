@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Github, Globe } from "lucide-react";
+import { ArrowUpRight, Globe } from "lucide-react";
+import { siGithub } from "simple-icons";
+import { SimpleIcon } from "@/components/ui/simple-icon";
 
 interface Project {
   id: string;
@@ -17,93 +19,88 @@ interface Project {
 
 export default function ProjectList({ projects }: { projects: Project[] }) {
   return (
-    <div className="space-y-32 md:space-y-48">
+    <div className="border-t border-zinc-200">
       {projects.map((project, index) => (
         <div 
           key={project.id}
-          className="group flex flex-col lg:grid lg:grid-cols-12 gap-10 lg:gap-16 items-start lg:items-center"
+          className="group flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-16 items-start py-16 border-b border-zinc-200 transition-colors hover:bg-zinc-50/50"
         >
-          {/* 1. Image Display - Wrapped with Link */}
-          <div className={`w-full lg:col-span-7 relative ${index % 2 !== 0 ? 'lg:order-2' : 'order-1'}`}>
-            <Link href={`/projects/${project.slug}`} className="block">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[2.5rem] bg-zinc-100 ring-1 ring-zinc-200 group-hover:ring-blue-500/40 transition-all duration-700 shadow-2xl">
-                <Image 
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-all duration-1000 grayscale-[0.5] group-hover:grayscale-0 opacity-80 group-hover:opacity-100 group-hover:scale-[1.05]"
-                />
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-700" />
-              </div>
+          {/* Image Display - Sharp Edges */}
+          <div className={`w-full lg:col-span-7 relative aspect-[16/10] overflow-hidden bg-zinc-100 ${index % 2 !== 0 ? 'lg:order-2' : 'lg:order-1'}`}>
+            <Link href={`/projects/${project.slug}`} className="block w-full h-full">
+              <Image 
+                src={project.image}
+                alt={project.title}
+                fill
+                className="object-cover transition-transform duration-1000 group-hover:scale-105 grayscale-[0.2] group-hover:grayscale-0"
+              />
             </Link>
           </div>
 
-          {/* Text Content */}
-          <div className={`w-full lg:col-span-5 space-y-8 px-1 lg:px-0 ${index % 2 !== 0 ? 'lg:order-1' : 'order-2'}`}>
-            <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <span className="text-xs font-mono text-zinc-600 tracking-tighter">
-                  NO. {String(index + 1).padStart(2, '0')}
-                </span>
-                <div className="h-[1px] flex-1 bg-zinc-200 group-hover:bg-blue-500/30 transition-all duration-700" />
-                <span className="text-xs font-mono text-blue-500/80 tracking-widest font-bold uppercase">
-                  {project.category}
-                </span>
-              </div>
-              
-              <div className="space-y-3">
-                {/* 2. Title - Wrapped with Link */}
-                <Link href={`/projects/${project.slug}`} className="inline-block">
-                  <h3 className="text-4xl md:text-6xl font-bold text-zinc-900 tracking-tight group-hover:text-blue-400 transition-colors duration-500">
+          {/* Text Content Container - No Card */}
+          <div className={`w-full lg:col-span-5 flex flex-col py-4 lg:py-8 ${index % 2 !== 0 ? 'lg:order-1' : 'order-2'}`}>
+            <div className="flex flex-col h-full justify-between space-y-8">
+              <div>
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="text-xs font-mono text-zinc-400">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-xs font-bold tracking-widest text-blue-600 uppercase">
+                    {project.category}
+                  </span>
+                </div>
+                
+                <Link href={`/projects/${project.slug}`} className="inline-block group-hover:text-blue-600 transition-colors mb-6">
+                  <h3 className="text-4xl lg:text-5xl font-medium text-zinc-900 tracking-tight leading-tight">
                     {project.title}
                   </h3>
                 </Link>
-                <p className="text-lg md:text-xl text-zinc-500 font-medium leading-tight">
+                
+                <p className="text-lg md:text-xl text-zinc-600 font-medium mb-4">
                   {project.subtitle}
+                </p>
+                
+                <p className="text-zinc-500 leading-relaxed text-base">
+                  {project.description}
                 </p>
               </div>
 
-              <p className="text-zinc-500 leading-relaxed text-base md:text-lg font-normal max-w-md">
-                {project.description}
-              </p>
-            </div>
-
-            {/* Tech Tags */}
-            <div className="flex flex-wrap gap-2">
-              {project.tags?.map((tag: string) => (
-                <span key={tag} className="text-[10px] font-bold uppercase tracking-widest border border-zinc-200 bg-zinc-50 px-4 py-1.5 rounded-full text-zinc-500 group-hover:text-zinc-700 transition-colors">
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* Action Links */}
-            <div className="flex items-center gap-6 pt-4">
-              <Link 
-                href={`/projects/${project.slug}`}
-                className="inline-flex items-center gap-3 text-zinc-900 group/link text-base md:text-lg font-semibold tracking-tight transition-all"
-              >
-                <span className="border-b-2 border-zinc-200 group-hover/link:border-blue-500 pb-1 transition-all duration-300">
-                  Lihat studi kasus
-                </span>
-                <div className="bg-zinc-100 p-3 rounded-full group-hover/link:bg-blue-600 group-hover/link:rotate-45 transition-all duration-500">
-                  <ArrowUpRight size={20} />
+              <div className="space-y-8 mt-auto">
+                <div className="flex flex-wrap gap-2">
+                  {project.tags?.map((tag: string) => (
+                    <span key={tag} className="text-xs font-medium px-0 py-1 border-b border-zinc-200 text-zinc-500 mr-4">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-              </Link>
 
-              {/* GitHub & Demo Link */}
-              <div className="flex gap-4 border-l border-zinc-200 pl-6">
-                {project.githubLink && (
-                  <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-zinc-900 transition-colors">
-                    <Github size={22} />
-                  </a>
-                )}
-                {project.liveDemo && (
-                  <a href={project.liveDemo} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-blue-400 transition-colors">
-                    <Globe size={22} />
-                  </a>
-                )}
+                <div className="flex items-center gap-6 pt-4">
+                  <Link 
+                    href={`/projects/${project.slug}`}
+                    className="inline-flex items-center gap-3 text-zinc-900 font-semibold group/btn"
+                  >
+                    <span className="border-b border-zinc-900 pb-1 group-hover/btn:text-blue-600 group-hover/btn:border-blue-600 transition-colors">
+                      Lihat studi kasus
+                    </span>
+                    <ArrowUpRight size={18} className="group-hover/btn:text-blue-600 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                  </Link>
+
+                  {/* GitHub & Demo Link */}
+                  {(project.githubLink || project.liveDemo) && (
+                    <div className="flex items-center gap-4 border-l border-zinc-200 pl-6 h-5">
+                      {project.githubLink && (
+                        <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-900 transition-colors">
+                          <SimpleIcon icon={siGithub} size={20} />
+                        </a>
+                      )}
+                      {project.liveDemo && (
+                        <a href={project.liveDemo} target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-blue-600 transition-colors">
+                          <Globe size={20} />
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

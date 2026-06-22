@@ -10,92 +10,92 @@ export default async function Projects() {
     return (
         <Section id="projects" data-aos="fade-up" className="text-zinc-700 [-webkit-tap-highlight-color:transparent]">
             {/* --- SECTION HEADER --- */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24 gap-6 border-b border-zinc-100 pb-10">
-                <div className="space-y-2">
-                    <span className="text-md text-blue-500 font-bold">
-                        My archive
-                    </span>
-                    <h2 className="text-5xl md:text-8xl font-bold text-zinc-900 tracking-tight">
+            <div className="flex flex-col md:flex-row items-start justify-between pt-16 md:pt-32 pb-16 md:pb-24 gap-12 md:gap-16 border-b border-zinc-100 mb-16 md:mb-24">
+                <div className="flex flex-col items-start space-y-6 md:w-1/2">
+                    <h2 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-zinc-900 tracking-tight">
                         Projects
                     </h2>
                 </div>
-                <p className="text-zinc-500 max-w-sm text-base md:text-lg font-medium">
-                    Koleksi proyek terbaru yang menampilkan inovasi dan keahlian dalam pengembangan aplikasi modern.
-                </p>
+
+                <div className="flex flex-col items-start md:w-1/2 md:pt-16 space-y-6">
+                    <div className="inline-flex items-center gap-2">
+                        <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+                        <span className="text-sm text-blue-600 font-semibold uppercase tracking-wider">
+                            My archive
+                        </span>
+                    </div>
+                    <p className="text-md sm:text-lg md:text-xl text-zinc-500 max-w-xl leading-relaxed">
+                        Koleksi proyek terbaru yang menampilkan inovasi dan keahlian dalam pengembangan aplikasi modern.
+                    </p>
+                </div>
             </div>
 
             {/* --- PROJECTS LIST --- */}
-            <div className="space-y-32 md:space-y-40">
+            <div className="border-t border-zinc-200">
                 {projects.map((project, index) => (
                     <div 
                         key={project.id}
-                        className="group flex flex-col lg:grid lg:grid-cols-12 gap-10 lg:gap-16 items-start lg:items-center"
+                        className="group flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-16 items-start py-16 border-b border-zinc-200 transition-colors hover:bg-zinc-50/50"
                     >
-                        {/* Image Display */}
-                        <div className={`w-full lg:col-span-7 relative ${index % 2 !== 0 ? 'lg:order-2' : 'order-1'}`}>
-                            <Link href={`/projects/${project.slug}`} className="block active:scale-[0.98] transition-transform duration-200">
-                                <div className="relative aspect-[16/10] overflow-hidden rounded-[2.5rem] bg-zinc-100 border border-zinc-200 group-hover:border-blue-500/40 transition-all duration-700 shadow-2xl">
-                                    <Image 
-                                        src={project.image}
-                                        alt={project.title}
-                                        fill
-                                        className="object-cover transition-all duration-1000 grayscale-[0.5] group-hover:grayscale-0 opacity-80 group-hover:opacity-100 group-hover:scale-105"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent opacity-60" />
-                                </div>
+                        {/* Image Display - Sharp Edges */}
+                        <div className={`w-full lg:col-span-7 relative aspect-[16/10] overflow-hidden bg-zinc-100 ${index % 2 !== 0 ? 'lg:order-2' : 'lg:order-1'}`}>
+                            <Link href={`/projects/${project.slug}`} className="block w-full h-full">
+                                <Image 
+                                    src={project.image}
+                                    alt={project.title}
+                                    fill
+                                    className="object-cover transition-transform duration-1000 group-hover:scale-105 grayscale-[0.2] group-hover:grayscale-0"
+                                />
                             </Link>
                         </div>
 
-                        {/* Text Content */}
-                        <div className={`w-full lg:col-span-5 space-y-8 px-1 lg:px-0 ${index % 2 !== 0 ? 'lg:order-1' : 'order-2'}`}>
-                            <div className="space-y-6">
-                                <div className="flex items-center gap-4">
-                                    <span className="text-xs font-bold text-zinc-400">
-                                        No. {String(index + 1).padStart(2, '0')}
-                                    </span>
-                                    <div className="h-px flex-1 bg-zinc-200 group-hover:bg-blue-500/30 transition-all duration-700" />
-                                    <span className="text-xs text-blue-500 font-bold">
-                                        {project.category}
-                                    </span>
-                                </div>
-                                
-                                <div className="space-y-3">
-                                    <Link href={`/projects/${project.slug}`} className="inline-block active:text-blue-500 transition-colors">
-                                        <h3 className="text-4xl md:text-6xl font-bold text-zinc-900 tracking-tight group-hover:text-blue-400 transition-colors duration-500 leading-none">
+                        {/* Text Content Container - No Card */}
+                        <div className={`w-full lg:col-span-5 flex flex-col py-4 lg:py-8 ${index % 2 !== 0 ? 'lg:order-1' : 'order-2'}`}>
+                            <div className="flex flex-col h-full justify-between space-y-8">
+                                <div>
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <span className="text-xs font-mono text-zinc-400">
+                                            {String(index + 1).padStart(2, '0')}
+                                        </span>
+                                        <span className="text-xs font-bold tracking-widest text-blue-600 uppercase">
+                                            {project.category}
+                                        </span>
+                                    </div>
+                                    
+                                    <Link href={`/projects/${project.slug}`} className="inline-block group-hover:text-blue-600 transition-colors mb-6">
+                                        <h3 className="text-4xl lg:text-5xl font-medium text-zinc-900 tracking-tight leading-tight">
                                             {project.title}
                                         </h3>
                                     </Link>
-                                    <p className="text-lg md:text-xl text-zinc-500 font-medium">
+                                    
+                                    <p className="text-lg md:text-xl text-zinc-600 font-medium mb-4">
                                         {project.subtitle}
+                                    </p>
+                                    
+                                    <p className="text-zinc-500 leading-relaxed text-base">
+                                        {project.description}
                                     </p>
                                 </div>
 
-                                <p className="text-zinc-500 leading-relaxed text-base md:text-lg font-normal max-w-md">
-                                    {project.description}
-                                </p>
-                            </div>
-
-                            {/* Tech Tags - No uppercase, No tracking */}
-                            <div className="flex flex-wrap gap-2">
-                                {project.tags?.map((tag: string) => (
-                                    <span key={tag} className="text-[11px] font-bold border border-zinc-200 bg-zinc-50 px-4 py-1.5 rounded-full text-zinc-500 group-hover:text-zinc-300 transition-colors">
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-
-                            <div className="pt-4">
-                                <Link 
-                                    href={`/projects/${project.slug}`}
-                                    className="inline-flex items-center gap-3 text-zinc-900 group/link text-base md:text-lg font-bold transition-all active:text-blue-500"
-                                >
-                                    <span className="border-b-2 border-zinc-200 group-hover/link:border-blue-500 group-active:border-blue-500 pb-1 transition-all duration-300">
-                                        Lihat studi kasus
-                                    </span>
-                                    <div className="bg-zinc-100 p-3 rounded-full group-hover/link:bg-blue-600 group-active:bg-blue-500 transition-all duration-500">
-                                        <ArrowUpRight size={20} />
+                                <div className="space-y-8 mt-auto">
+                                    <div className="flex flex-wrap gap-2">
+                                        {project.tags?.map((tag: string) => (
+                                            <span key={tag} className="text-xs font-medium px-0 py-1 border-b border-zinc-200 text-zinc-500 mr-4">
+                                                {tag}
+                                            </span>
+                                        ))}
                                     </div>
-                                </Link>
+
+                                    <Link 
+                                        href={`/projects/${project.slug}`}
+                                        className="inline-flex items-center gap-3 text-zinc-900 font-semibold group/btn"
+                                    >
+                                        <span className="border-b border-zinc-900 pb-1 group-hover/btn:text-blue-600 group-hover/btn:border-blue-600 transition-colors">
+                                            Lihat studi kasus
+                                        </span>
+                                        <ArrowUpRight size={18} className="group-hover/btn:text-blue-600 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -110,7 +110,7 @@ export default async function Projects() {
                 >
                     <div className="relative z-10 flex flex-col items-center space-y-6">
                         <div className="space-y-4">
-                            <h3 className="text-4xl md:text-7xl text-zinc-900 font-bold tracking-tight active:text-blue-500 transition-colors">
+                            <h3 className="text-4xl md:text-7xl text-zinc-900 font-semibold tracking-tight active:text-blue-500 transition-colors">
                                 Lihat seluruh project
                             </h3>
                             <p className="text-zinc-500 text-lg md:text-xl font-medium max-w-xl mx-auto">
@@ -118,7 +118,7 @@ export default async function Projects() {
                             </p>
                         </div>
 
-                        <div className="mt-4 flex items-center gap-3 text-zinc-900 font-bold text-lg border-b border-zinc-200 pb-2 group-hover:border-blue-500 group-active:border-blue-500 group-active:text-blue-500 transition-all duration-500">
+                        <div className="mt-4 flex items-center gap-3 text-zinc-900 font-semibold text-lg border-b border-zinc-200 pb-2 group-hover:border-blue-500 group-active:border-blue-500 group-active:text-blue-500 transition-all duration-500">
                             <span>Buka portofolio lengkap</span>
                             <div className="bg-zinc-100 p-3 rounded-full group-hover:bg-blue-600 group-active:bg-blue-500 transition-all duration-500">
                                 <ArrowUpRight size={22} className="group-hover:rotate-45 transition-transform duration-500" />

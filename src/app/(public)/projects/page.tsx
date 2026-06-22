@@ -29,9 +29,25 @@ export default async function Page({
   return (
     <MainLayout>
       <Section>
-        <div className="mb-20 space-y-4">
-          <h2 className="text-md font-mono text-blue-500 tracking-[0.2em]">My Archive</h2>
-          <h1 className="text-5xl md:text-7xl font-medium text-zinc-900 tracking-tighter uppercase">Projects</h1>
+        {/* --- HERO SECTION --- */}
+        <div className="flex flex-col md:flex-row items-start justify-between pt-16 md:pt-32 pb-16 md:pb-24 gap-12 md:gap-16 border-b border-zinc-100 mb-16 md:mb-24">
+          <div className="flex flex-col items-start space-y-6 md:w-1/2">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-zinc-900 tracking-tight">
+              Projects
+            </h1>
+          </div>
+
+          <div className="flex flex-col items-start md:w-1/2 md:pt-16 space-y-6">
+            <div className="inline-flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+              <span className="text-sm text-blue-600 font-semibold uppercase tracking-wider">
+                My Archive
+              </span>
+            </div>
+            <p className="text-md sm:text-lg md:text-xl text-zinc-500 max-w-xl leading-relaxed">
+              Koleksi proyek terbaru yang menampilkan inovasi dan keahlian dalam pengembangan aplikasi modern.
+            </p>
+          </div>
         </div>
 
         {/* Kirim data yang sudah di-format, bukan data mentah dari Prisma */}
@@ -50,7 +66,7 @@ export default async function Page({
                   href={`?page=${pageNum}`}
                   className={`transition-all duration-500 ease-in-out select-none ${
                     isActive 
-                    ? "text-4xl md:text-4xl text-blue-500 font-bold leading-none tracking-tighter" 
+                    ? "text-4xl md:text-4xl text-blue-500 font-semibold leading-none tracking-tighter" 
                     : "text-2xl md:text-2xl text-zinc-300 hover:text-zinc-500 font-light leading-none"
                   }`}
                 >

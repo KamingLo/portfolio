@@ -1,5 +1,7 @@
 import { getProjects } from "@/actions/admin/projects/action";
-import { Plus, ExternalLink, Github, Pencil, Eye, Image as ImageIcon } from "lucide-react";
+import { Plus, ExternalLink, Pencil, Eye, Image as ImageIcon } from "lucide-react";
+import { siGithub } from "simple-icons";
+import { SimpleIcon } from "@/components/ui/simple-icon";
 import Link from "next/link";
 import Image from "next/image"; // FIX: Import Image
 import DeleteButton from "@/components/ui/admin/projects/delete-button";
@@ -88,7 +90,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
                         </Link>
                         {item.githubLink && (
                           <a href={item.githubLink} target="_blank" className="p-2.5 bg-zinc-900 rounded-xl hover:text-white active:scale-90 transition-all border border-zinc-800">
-                            <Github size={18} />
+                            <SimpleIcon icon={siGithub} size={18} />
                           </a>
                         )}
                         {item.liveDemo && (
@@ -147,7 +149,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
                     </Link>
                     {item.githubLink && (
                       <a href={item.githubLink} target="_blank" className="p-3 bg-zinc-900 rounded-2xl text-zinc-400 active:scale-90 border border-zinc-800">
-                        <Github size={20} />
+                        <SimpleIcon icon={siGithub} size={20} />
                       </a>
                     )}
                   </div>

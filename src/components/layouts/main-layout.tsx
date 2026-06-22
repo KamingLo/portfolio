@@ -10,7 +10,7 @@ export default function MainLayout({ children, className = "" }: MainLayoutProps
     <div className="relative min-h-screen bg-white overflow-x-clip">
         <Navbar />
 
-        <main className={`relative z-10 pb-20 max-w-7xl mx-auto px-6 selection:bg-blue-100 font-sans ${className}`}>
+        <main className={`relative z-10 pb-20 px-6 mx-auto max-w-[1600px] selection:bg-blue-100 font-sans ${className}`}>
             {children}
         </main>
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Layers } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Section from "@/components/layouts/sections";
 import { format } from "date-fns";
 import { getLatestHomeExperience } from "@/actions/public/home/action";
@@ -12,99 +12,84 @@ export async function Experience() {
     return (
         <Section id="experience" data-aos="fade-up" className="mt-16 text-zinc-700 [-webkit-tap-highlight-color:transparent]">
             {/* --- HEADER SECTION --- */}
-            <div className="flex flex-col justify-between mb-16 md:mb-24 gap-6 border-b border-zinc-100 pb-10">
-                <div className="space-y-2">
-                    <span className="text-md text-blue-500 font-bold">
-                        Professional journey
-                    </span>
-                    <h2 className="text-5xl md:text-8xl font-bold text-zinc-900 tracking-tight">
+            <div className="flex flex-col md:flex-row items-start justify-between pt-16 md:pt-32 pb-16 md:pb-24 gap-12 md:gap-16 border-b border-zinc-100 mb-16 md:mb-24">
+                <div className="flex flex-col items-start space-y-6 md:w-1/2">
+                    <h2 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-zinc-900 tracking-tight">
                         Experiences
                     </h2>
                 </div>
+
+                <div className="flex flex-col items-start md:w-1/2 md:pt-16 space-y-6">
+                    <div className="inline-flex items-center gap-2">
+                        <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+                        <span className="text-sm text-blue-600 font-semibold uppercase tracking-wider">
+                            Professional journey
+                        </span>
+                    </div>
+                    <p className="text-md sm:text-lg md:text-xl text-zinc-500 max-w-xl leading-relaxed">
+                        A timeline of my professional experience, showcasing the companies I&apos;ve worked with and the impact I&apos;ve made along the way.
+                    </p>
+                </div>
             </div>
 
-            {/* --- EXPERIENCE CONTENT (Project List Style) --- */}
-            <div className="relative">
-                
-                {/* 1. Garis Backbone Vertikal */}
-                <div className="absolute left-0 md:left-0 top-0 bottom-0 w-px border-l border-dashed border-zinc-300 z-0" />
+            {/* --- EXPERIENCE CONTENT --- */}
+            <div className="py-8 md:py-12 border-t border-zinc-200">
+                <div className="group flex flex-col md:flex-row gap-8 md:gap-16 items-start">
+                    {/* Left Column - Date & Company */}
+                    <div className="w-full md:w-1/4 flex flex-col space-y-2 shrink-0 md:pt-1">
+                        <span className="text-sm font-semibold text-blue-600 tracking-wider uppercase">
+                            {format(new Date(experience.start_date), "MMM yyyy")} — Present
+                        </span>
+                        <span className="text-xl md:text-2xl font-semibold text-zinc-900">
+                            {experience.company}
+                        </span>
+                    </div>
 
-                <div className="relative pl-8 md:pl-24 group flex flex-col items-start mb-20 md:mb-32">
-                    
-                    {/* Tanda Titik pada Garis Backbone */}
-                    <div className="absolute left-[-5px] top-1 w-[11px] h-[11px] rounded-full bg-white border border-zinc-300 group-hover:border-blue-500 transition-colors duration-500 z-10" />
+                    {/* Right Column - Role & Description */}
+                    <div className="w-full md:w-3/4 space-y-6">
+                        <Link href="/experiences" className="inline-block">
+                            <h3 className="text-3xl md:text-5xl font-semibold text-zinc-900 group-hover:text-blue-600 transition-colors">
+                                {experience.job_title}
+                            </h3>
+                        </Link>
+                        
+                        {/* Description */}
+                        <div 
+                            className="text-zinc-500 text-base md:text-lg leading-relaxed max-w-3xl prose prose-zinc prose-p:my-2 prose-ul:my-2 prose-li:my-1"
+                            dangerouslySetInnerHTML={{ __html: experience.description }}
+                        />
 
-                    {/* Sisi Teks */}
-                    <div className="w-full space-y-8">
-                        <div className="space-y-6">
-                            
-                            {/* --- METADATA BAR --- */}
-                            <div className="flex items-center gap-4">
-                                <span className="text-[10px] md:text-xs text-zinc-600 whitespace-nowrap uppercase tracking-widest">
-                                    Pekerjaan Terbaru
-                                </span>
-                                <div className="h-[1px] flex-1 bg-zinc-200 group-hover:bg-blue-500/30 transition-all duration-700" />
-                                <span className="text-[10px] md:text-xs text-blue-500/80 font-bold flex items-center gap-2 whitespace-nowrap">
-                                    <Layers size={12} />
-                                    {format(new Date(experience.start_date), "MMM yyyy")} — Present
-                                </span>
+                        {/* Tech Tags */}
+                        {experience.skills && (
+                            <div className="flex flex-wrap gap-2 pt-2">
+                                {experience.skills.split(",").map((skill: string) => (
+                                    <span 
+                                        key={skill} 
+                                        className="text-xs md:text-sm font-semibold border border-zinc-200 px-3 py-1.5 text-zinc-500 hover:border-blue-300 hover:text-blue-600 transition-colors"
+                                    >
+                                        {skill.trim()}
+                                    </span>
+                                ))}
                             </div>
-                            
-                            {/* --- TITLE & COMPANY --- */}
-                            <div className="space-y-3">
-                                <Link href="/experiences">
-                                    <h3 className="text-3xl md:text-7xl font-bold text-zinc-900 group-hover:text-blue-400 transition-colors duration-500 leading-tight">
-                                        {experience.job_title}
-                                    </h3>
-                                </Link>
-                                <p className="text-lg md:text-2xl text-zinc-500 font-medium">
-                                    at <span className="text-zinc-700">{experience.company}</span>
-                                </p>
-                            </div>
-
-                            {/* --- DESCRIPTION (TIPTAP HTML) --- */}
-                            <div 
-                                className="text-zinc-500 text-sm md:text-xl font-normal max-w-3xl prose prose-sm md:prose-base leading-relaxed"
-                                dangerouslySetInnerHTML={{ __html: experience.description }}
-                            />
-                        </div>
-
-                        {/* --- TECH TAGS --- */}
-                        <div className="flex flex-wrap gap-2 md:gap-3">
-                            {experience.skills?.split(",").map((skill: string) => (
-                                <span 
-                                    key={skill} 
-                                    className="text-[10px] md:text-sm border border-zinc-200 bg-zinc-50 px-4 py-1.5 md:px-5 md:py-2 rounded-full text-zinc-500 group-hover:text-zinc-300 group-hover:border-blue-500/20 transition-all duration-500"
-                                >
-                                    {skill.trim()}
-                                </span>
-                            ))}
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>
 
             {/* --- CTA SECTION --- */}
-            <div className="mt-12 md:mt-20">
+            <div className="mt-16 md:mt-24 border-t border-zinc-200 pt-16 text-center">
                 <Link 
                     href="/experiences"
-                    className="group relative block overflow-hidden rounded-3xl md:rounded-[3rem] border border-zinc-200 bg-zinc-50/50 p-10 md:p-24 text-center transition-all duration-500 hover:bg-zinc-100 hover:border-blue-500/20"
+                    className="inline-flex flex-col items-center group"
                 >
-                    <div className="relative z-10 flex flex-col items-center space-y-6">
-                        <h3 className="text-3xl md:text-7xl text-zinc-900 font-bold tracking-tight active:text-blue-500 transition-colors">
-                            Lihat pengalaman lainnya
-                        </h3>
+                    <h3 className="text-3xl md:text-5xl text-zinc-900 font-medium tracking-tight group-hover:text-blue-600 transition-colors mb-6">
+                        Lihat pengalaman lainnya
+                    </h3>
 
-                        <div className="mt-4 flex items-center gap-3 text-zinc-900 font-bold text-base md:text-lg border-b border-zinc-200 pb-2 group-hover:border-blue-500 transition-all duration-500">
-                            <span>Buka portofolio lengkap</span>
-                            <div className="bg-zinc-100 p-2.5 md:p-3 rounded-full group-hover:bg-blue-600 transition-all duration-500">
-                                <ArrowUpRight size={20} className="group-hover:rotate-45 transition-transform duration-500" />
-                            </div>
-                        </div>
+                    <div className="flex items-center gap-3 text-zinc-600 font-medium text-lg border-b border-zinc-900 pb-1 group-hover:border-blue-600 group-hover:text-blue-600 transition-all">
+                        <span>Buka portofolio lengkap</span>
+                        <ArrowUpRight size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     </div>
-
-                    {/* Subtle Background Glow */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[200px] md:h-[400px] bg-blue-500/5 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
                 </Link>
             </div>
         </Section>

@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
-
+import { Logo } from '@/components/ui/logo';
 export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -32,20 +31,11 @@ export const Navbar = () => {
 
     return (
         <header className={`sticky top-0 w-full transition-all duration-300 [-webkit-tap-highlight-color:transparent] z-50 ${isOpen ? 'backdrop-blur-none' : 'backdrop-blur-md'}`}>
-            <div className="mx-auto max-w-7xl px-6 md:px-12">
+            <div className="mx-auto max-w-[1600px] px-6 md:px-12">
                 <nav className="flex items-center justify-between py-4 relative z-[210]">
                     
                     <Link href="/" className="pl-4 transition-opacity duration-200 active:opacity-70">
-                        <div className="flex items-center gap-3">
-                            <Image
-                                src="/assets/image/logo-black.svg"
-                                alt="Logo"
-                                width={40}
-                                height={40}
-                                priority
-                            />
-                            <span className="text-zinc-900 font-semibold text-lg tracking-tight">Kaming</span>
-                        </div>
+                        <Logo/>
                     </Link>
 
                     <ul className="hidden gap-2 text-md font-medium text-zinc-500 md:flex">
@@ -62,7 +52,7 @@ export const Navbar = () => {
                     </ul>
 
                     <div className="flex items-center gap-2">
-                        <Link href={"/contact"} className="hidden md:flex items-center gap-2 rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-bold text-white active:bg-blue-500 active:text-white transition-all">
+                        <Link href={"/contact"} className="hidden md:flex items-center gap-2 rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-semibold text-white active:bg-blue-500 active:text-white transition-all">
                             Let&apos;s talk
                             <ArrowUpRight size={16} />
                         </Link>
@@ -98,7 +88,7 @@ export const Navbar = () => {
                                 <Link
                                     href={link.href}
                                     onClick={() => delayNavigation()}
-                                    className="flex items-center justify-between text-4xl font-bold text-zinc-900 border-b border-zinc-200 pb-5 transition-all duration-200 active:text-blue-500 active:border-blue-500/50"
+                                    className="flex items-center justify-between text-4xl font-semibold text-zinc-900 border-b border-zinc-200 pb-5 transition-all duration-200 active:text-blue-500 active:border-blue-500/50"
                                 >
                                     {link.name}
                                     <ArrowUpRight size={28} className='text-blue-500/70'/>
@@ -106,28 +96,6 @@ export const Navbar = () => {
                             </li>
                         ))}
                     </ul>
-
-                    <div 
-                        className={`space-y-8 transform transition-all duration-500 ${
-                            isOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-                        }`}
-                        style={{ transitionDelay: isOpen ? `${navLinks.length * 80 + 100}ms` : '0ms' }}
-                    >
-                        <div className="space-y-2">
-                            <span className="text-[10px] font-bold text-zinc-500 block uppercase tracking-widest">Get in touch</span>
-                            <Link href="mailto:lokaming86@gmail.com" className="text-xl font-bold text-zinc-900 active:text-blue-500">
-                                lokaming86@gmail.com
-                            </Link>
-                        </div>
-                        <a 
-                            href="https://wa.me/6283835360789" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="block w-full rounded-2xl bg-blue-600 py-6 text-lg font-bold text-white transition-all active:bg-blue-400 text-center"
-                        >
-                            WhatsApp
-                        </a>
-                    </div>
                 </div>
             </div>
         </header>

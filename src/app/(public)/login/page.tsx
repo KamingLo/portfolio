@@ -19,7 +19,7 @@ export default function LoginPage() {
                 
                 <div className="relative z-10 flex flex-col justify-between p-16 w-full">
                     {/* Slide Down Animation */}
-                    <Link href="/" className="flex items-center gap-2 text-xl font-bold tracking-tighter transition-all hover:text-blue-500 animate-slide-down">
+                    <Link href="/" className="flex items-center gap-2 text-xl font-semibold tracking-tighter transition-all hover:text-blue-500 animate-slide-down">
                         <ArrowLeft size={18} className="text-zinc-500" />
                         Back to main
                     </Link>
@@ -31,7 +31,7 @@ export default function LoginPage() {
                         </div>
                         {/* Fade In & Slide Up Text */}
                         <div className="space-y-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
-                            <h1 className="text-5xl font-bold tracking-tighter leading-tight">
+                            <h1 className="text-5xl font-semibold tracking-tighter leading-tight">
                                 Secure access to <br /> your dashboard.
                             </h1>
                             <p className="text-zinc-500 text-lg max-w-md font-medium">
@@ -53,7 +53,7 @@ export default function LoginPage() {
             <div className="w-full lg:w-1/2 flex flex-col items-center justify-center p-8 md:p-16 relative">
                 {/* Mobile Logo */}
                 <div className="lg:hidden absolute top-8 left-8 animate-in fade-in slide-in-from-top-4 duration-500">
-                   <Link href="/" className="flex items-center gap-2 text-xl font-bold tracking-tighter">
+                   <Link href="/" className="flex items-center gap-2 text-xl font-semibold tracking-tighter">
                         <ArrowLeft size={18} className="text-zinc-500" />
                         Back to main
                     </Link>
@@ -62,7 +62,7 @@ export default function LoginPage() {
                 {/* Form Wrapper with Slide Up Animation */}
                 <div className="w-full max-w-sm space-y-10 animate-in fade-in slide-in-from-bottom-12 duration-1000">
                     <div className="space-y-2">
-                        <h2 className="text-3xl font-bold tracking-tight">Welcome back</h2>
+                        <h2 className="text-3xl font-semibold tracking-tight">Welcome back</h2>
                         <p className="text-zinc-500 font-medium">Please enter your details to sign in.</p>
                     </div>
 

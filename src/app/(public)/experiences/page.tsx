@@ -2,6 +2,7 @@ import { getPublicExperiences } from "@/actions/public/experiences/action";
 import ExperienceList from "@/components/ui/experiences/experience-list";
 import MainLayout from "@/components/layouts/main-layout";
 import Section from "@/components/layouts/sections";
+import { Logo } from "@/components/ui/logo";
 
 export const dynamic = 'force-dynamic';
 
@@ -15,7 +16,6 @@ export default async function ExperiencePage() {
     // Konversi Date ke string
     start_date: exp.start_date.toISOString(),
     
-    // PERBAIKAN DI SINI:
     // Jika exp.end_date ada, jadikan ISO string. Jika null, paksa jadi undefined.
     end_date: exp.end_date ? exp.end_date.toISOString() : undefined,
     
@@ -26,14 +26,25 @@ export default async function ExperiencePage() {
 
   return (
     <MainLayout>
-      <Section>
-        <div className="mb-20 space-y-4">
-          <h2 className="text-md font-mono text-blue-500">Professional Journey</h2>
-          <h1 className="text-5xl md:text-7xl font-semibold text-zinc-900">Experiences</h1>
+      <Section id="experiences-hero" className="text-zinc-700 [-webkit-tap-highlight-color:transparent]">
+        {/* --- HERO SECTION --- */}
+        <div className="flex flex-col md:flex-row items-start justify-between pt-16 md:pt-32 pb-16 md:pb-24 gap-12 md:gap-16 border-b border-zinc-100">
+          <div className="flex flex-col items-start space-y-6 md:w-1/2">
+            <Logo />
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-zinc-900 tracking-tight">
+              Professional Journey.
+            </h1>
+          </div>
+
+          <div className="flex flex-col items-start md:w-1/2 md:pt-16 space-y-6">
+            <p className="text-md sm:text-lg md:text-xl text-zinc-500 max-w-xl leading-relaxed">
+              A timeline of my professional experience, showcasing the companies I&apos;ve worked with and the impact I&apos;ve made along the way.
+            </p>
+          </div>
         </div>
 
-        {/* Kirim data yang sudah di-format */}
-        <ExperienceList experiences={formattedExperiences} />
+        {/* --- EXPERIENCES LIST --- */}
+        <ExperienceList experiences={formattedExperiences || []} />
       </Section>
     </MainLayout>
   );

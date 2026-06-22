@@ -35,14 +35,14 @@ const StackCategories = [
 
 export const TechStack = () => (
   <Section id="stack" data-aos="fade-in" className="text-zinc-700">
-    <div className="max-w-7xl mx-auto py-12 md:py-20 px-6">
+    <div className="max-w-[1440px] mx-auto py-12 md:py-20 px-6">
       
       {/* --- HEADER SECTION --- */}
       <div className="flex flex-col items-center justify-center text-center mb-16 md:mb-24 space-y-4 border-b border-zinc-100 pb-10">
-        <span className="text-sm text-blue-500 font-bold uppercase">
+        <span className="text-sm text-blue-500 font-semibold uppercase">
           Software engine
         </span>
-        <h2 className="text-4xl md:text-6xl font-bold text-zinc-900">
+        <h2 className="text-4xl md:text-6xl font-semibold text-zinc-900">
           Tech stack
         </h2>
         <p className="text-zinc-500 max-w-lg text-base md:text-lg">
@@ -57,7 +57,7 @@ export const TechStack = () => (
             
             {/* Sisi Kiri: Informasi Kategori */}
             <div className="md:w-1/3 space-y-3 md:sticky md:top-32">
-              <h3 className="text-2xl md:text-3xl font-bold text-zinc-900">
+              <h3 className="text-2xl md:text-3xl font-semibold text-zinc-900">
                 {category.title}
               </h3>
               <p className="text-zinc-500 text-sm md:text-base">
@@ -85,7 +85,7 @@ export const TechStack = () => (
                     </svg>
                   </div>
                   
-                  <span className="text-base md:text-lg font-bold text-zinc-600 group-hover:text-zinc-900 transition-colors duration-300">
+                  <span className="text-base md:text-lg font-semibold text-zinc-600 group-hover:text-zinc-900 transition-colors duration-300">
                     {logo.name}
                   </span>
                 </div>
