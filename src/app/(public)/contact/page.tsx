@@ -1,9 +1,15 @@
+import type { Metadata } from "next";
 import MainLayout from "@/components/layouts/main-layout";
 import Section from "@/components/layouts/sections";
 import { ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 import { siWhatsapp, siGmail, siIndeed, siGithub } from "simple-icons";
 import { SimpleIcon } from "@/components/ui/simple-icon";
+
+export const metadata: Metadata = {
+  title: "Contact Me",
+  description: "Get in touch with Kaming Lo. Connect via WhatsApp, Email, LinkedIn, or check out my open-source projects on GitHub.",
+};
 
 const contactMethods = [
   {

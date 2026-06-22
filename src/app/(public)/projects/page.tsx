@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getPublicProjects } from "@/actions/public/projects/action";
 import ProjectList from "@/components/ui/projects/project-list";
 import Link from "next/link";
@@ -6,6 +7,11 @@ import Section from "@/components/layouts/sections";
 import { Logo } from "@/components/ui/logo";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description: "Browse through the web applications, tools, and projects developed by Kaming Lo using React, Next.js, and other modern technologies.",
+};
 
 export default async function Page({ 
   searchParams 

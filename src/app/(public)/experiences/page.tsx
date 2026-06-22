@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getPublicExperiences } from "@/actions/public/experiences/action";
 import ExperienceList from "@/components/ui/experiences/experience-list";
 import MainLayout from "@/components/layouts/main-layout";
@@ -5,6 +6,11 @@ import Section from "@/components/layouts/sections";
 import { Logo } from "@/components/ui/logo";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: "Professional Experience",
+  description: "View the work timeline, projects, and career achievements of Kaming Lo in the tech and software engineering industry.",
+};
 
 export default async function ExperiencePage() {
     

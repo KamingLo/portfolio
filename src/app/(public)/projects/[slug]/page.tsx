@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getProjectBySlug } from "@/actions/public/projects/action";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -6,6 +7,31 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { siGithub } from "simple-icons";
 import { SimpleIcon } from "@/components/ui/simple-icon";
 import MainLayout from "@/components/layouts/main-layout";
+
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> 
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = await getProjectBySlug(slug);
+
+  if (!project) {
+    return {
+      title: "Project Not Found",
+    };
+  }
+
+  return {
+    title: project.title,
+    description: project.subtitle || `Learn more about ${project.title}, a project developed by Kaming Lo.`,
+    openGraph: {
+      title: `${project.title} | Kaming Lo`,
+      description: project.subtitle || `Learn more about ${project.title}, a project developed by Kaming Lo.`,
+      images: project.image ? [{ url: project.image }] : [],
+    },
+  };
+}
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
