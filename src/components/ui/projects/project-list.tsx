@@ -80,7 +80,7 @@ export default function ProjectList({ projects }: { projects: Project[] }) {
                     className="inline-flex items-center gap-3 text-zinc-900 font-semibold group/btn"
                   >
                     <span className="border-b border-zinc-900 pb-1 group-hover/btn:text-blue-600 group-hover/btn:border-blue-600 transition-colors">
-                      Lihat studi kasus
+                      View case study
                     </span>
                     <ArrowUpRight size={18} className="group-hover/btn:text-blue-600 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                   </Link>

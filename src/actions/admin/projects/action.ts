@@ -39,7 +39,7 @@ export async function createProject(formData: FormData) {
         .from('kamingportfolio')
         .upload(fileName, imageFile);
 
-      if (error) throw new Error(`Upload gagal: ${error.message}`);
+      if (error) throw new Error(`Upload failed: ${error.message}`);
 
       const { data: { publicUrl } } = supabase.storage
         .from('kamingportfolio')
@@ -69,10 +69,10 @@ export async function createProject(formData: FormData) {
     });
 
     revalidatePath("/admin/projects");
-    return { success: true, message: `Proyek ${newId} berhasil diterbitkan!` };
+    return { success: true, message: `Project ${newId} published successfully!` };
 
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Gagal membuat proyek.";
+    const errorMessage = error instanceof Error ? error.message : "Failed to create project.";
     return { success: false, message: errorMessage };
   }
 }
@@ -85,7 +85,7 @@ export async function deleteProject(id: string) {
       select: { image: true }
     });
 
-    if (!project) throw new Error("Proyek tidak ditemukan.");
+    if (!project) throw new Error("Project not found.");
 
     if (project.image) {
       const fileName = project.image.split('/').pop();
@@ -97,9 +97,9 @@ export async function deleteProject(id: string) {
     await prisma.project.delete({ where: { id } });
 
     revalidatePath("/admin/projects");
-    return { success: true, message: "Proyek berhasil dihapus." };
+    return { success: true, message: "Project deleted successfully." };
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Gagal menghapus proyek.";
+    const errorMessage = error instanceof Error ? error.message : "Failed to delete project.";
     return { success: false, message: errorMessage };
   }
 }
@@ -146,7 +146,7 @@ export async function getProjects(page: number = 1, limit: number = 6, query: st
     console.error("Action Error:", error);
     return { 
       success: false, 
-      message: "Gagal mengambil data", 
+      message: "Failed to fetch data", 
       data: [], 
       total: 0, 
       totalPages: 0 
@@ -172,7 +172,7 @@ export async function updateProject(formData: FormData) {
         .from('kamingportfolio')
         .upload(fileName, imageFile);
 
-      if (uploadError) throw new Error("Gagal upload gambar baru.");
+      if (uploadError) throw new Error("Failed to upload new image.");
 
       const { data: { publicUrl } } = supabase.storage
         .from('kamingportfolio')
@@ -210,10 +210,10 @@ export async function updateProject(formData: FormData) {
     });
 
     revalidatePath("/admin/projects");
-    return { success: true, message: "Proyek berhasil diperbarui!" };
+    return { success: true, message: "Project updated successfully!" };
 
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Gagal memperbarui proyek.";
+    const errorMessage = error instanceof Error ? error.message : "Failed to update project.";
     console.error("Update Error:", error);
     return { success: false, message: errorMessage };
   }

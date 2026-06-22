@@ -23,7 +23,7 @@ export const Footer = () => {
 
     return (
         <footer className="relative border-t border-zinc-200 bg-zinc-50/80 backdrop-blur-2xl pt-16 pb-8 md:pt-24 md:pb-12 [-webkit-tap-highlight-color:transparent]">
-            <div className="mx-auto max-w-[1440px] px-6 md:px-12 relative z-10">
+            <div className="mx-auto max-w-[1440px] px-4 md:px-12 relative z-10">
                 
                 {/* --- CALL TO ACTION SECTION --- */}
                 <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 mb-16 md:mb-24">
@@ -97,7 +97,7 @@ export const Footer = () => {
                 </div>
 
                 {/* --- BOTTOM SECTION --- */}
-                <p className="text-center text-gray-500">
+                <p className="text-left text-gray-500">
                     © {currentYear} Kaming. All rights reserved.
                 </p>
 

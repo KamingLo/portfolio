@@ -25,7 +25,7 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
     <ProjectForm 
       initialData={formattedProject} 
       action={updateProject} 
-      title="Edit Proyek" 
+      title="Edit Project" 
     />
   );
 }

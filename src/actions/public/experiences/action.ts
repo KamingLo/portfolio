@@ -23,7 +23,7 @@ export async function getPublicExperiences() {
     return { 
       success: false, 
       data: [],
-      message: "Gagal mengambil data pengalaman." 
+      message: "Failed to fetch experience data." 
     };
   }
 }

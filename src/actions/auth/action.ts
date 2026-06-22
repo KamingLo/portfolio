@@ -15,11 +15,11 @@ export async function loginAction(prevState: ActionState, formData: FormData) {
   const password = formData.get("password") as string;
 
   if (!email || !password) {
-    return { message: "Email dan password tidak boleh kosong!" };
+    return { message: "Email and password cannot be empty!" };
   }
 
   if (password.length < 8) {
-    return { message: "Password minimal harus 8 karakter!" };
+    return { message: "Password must be at least 8 characters long!" };
   }
 
   try {
@@ -30,19 +30,19 @@ export async function loginAction(prevState: ActionState, formData: FormData) {
 
     // 2. Validasi password menggunakan bcrypt
     if (!user) {
-      return { message: "Email atau password salah!" };
+      return { message: "Incorrect email or password!" };
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return { message: "Email atau password salah!" };
+      return { message: "Incorrect email or password!" };
     }
 
     // 3. Buat Session JWT & Simpan di Cookie
     await createSession(user.id.toString());
     
   } catch {
-    return { message: "Terjadi kesalahan sistem. Coba lagi nanti",};
+    return { message: "A system error occurred. Please try again later.",};
   }
 
   // 4. Redirect ke halaman tujuan (Harus di luar block try/catch)

@@ -15,7 +15,7 @@ export const AboutFounder = () => (
 
     <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-20 items-center">
       {/* Foto */}
-      <div className="md:col-span-5 flex justify-center md:justify-start">
+      <div className="md:col-span-5 flex justify-start">
         <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-3xl overflow-hidden border border-zinc-200 shadow-lg">
           <Image
             src="/assets/image/kaming.webp"
@@ -28,7 +28,7 @@ export const AboutFounder = () => (
       </div>
 
       {/* Teks */}
-      <div className="md:col-span-7 space-y-6 text-center md:text-left">
+      <div className="md:col-span-7 space-y-6 text-left">
         <div className="space-y-2">
           <h2 className="text-3xl md:text-5xl font-semibold text-zinc-900">
             Kaming Lo
@@ -43,7 +43,7 @@ export const AboutFounder = () => (
         </p>
 
         {/* Social Icons */}
-        <div className="flex items-center justify-center md:justify-start gap-4 pt-2">
+        <div className="flex items-center justify-start gap-4 pt-2">
           {socialLinks.map((link) => (
             <a
               key={link.name}

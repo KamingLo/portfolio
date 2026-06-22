@@ -23,7 +23,7 @@ export default async function ExperiencesPage({ searchParams }: { searchParams: 
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1">
               <h1 className="text-3xl md:text-4xl font-bold text-white">Professional experiences</h1>
-              <p className="text-zinc-500 text-sm">Total {response.total} riwayat karir terdaftar.</p>
+              <p className="text-zinc-500 text-sm">Total {response.total} registered career histories.</p>
             </div>
             <Link 
               href="/admin/experiences/new" 
@@ -45,8 +45,8 @@ export default async function ExperiencesPage({ searchParams }: { searchParams: 
               <tr className="text-zinc-500 text-xs border-b border-zinc-800 bg-zinc-900/50">
                 <th className="px-8 py-5 font-bold">Experience</th>
                 <th className="px-8 py-5 font-bold">Duration</th>
-                <th className="px-8 py-5 font-bold text-center">Status</th>
-                <th className="px-8 py-5 font-bold text-right">Aksi</th>
+                <th className="px-8 py-5 font-bold text-left">Status</th>
+                <th className="px-8 py-5 font-bold text-right">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-800">
@@ -72,7 +72,7 @@ export default async function ExperiencesPage({ searchParams }: { searchParams: 
                         </span>
                       </div>
                     </td>
-                    <td className="px-8 py-6 text-center">
+                    <td className="px-8 py-6 text-left">
                       {item.is_current && (
                         <span className="text-[11px] font-bold text-green-400 bg-green-400/5 px-3 py-1.5 rounded-full border border-green-400/10 inline-block">
                           Active role
@@ -90,7 +90,7 @@ export default async function ExperiencesPage({ searchParams }: { searchParams: 
                   </tr>
                 ))
               ) : (
-                <tr><td colSpan={4} className="px-8 py-20 text-center text-zinc-600">Tidak ada riwayat ditemukan.</td></tr>
+                <tr><td colSpan={4} className="px-8 py-20 text-left text-zinc-600">No history found.</td></tr>
               )}
             </tbody>
           </table>
@@ -132,13 +132,13 @@ export default async function ExperiencesPage({ searchParams }: { searchParams: 
               </div>
             ))
           ) : (
-            <div className="p-20 text-center text-zinc-600">Tidak ada riwayat ditemukan.</div>
+            <div className="p-20 text-left px-8 text-zinc-600">No history found.</div>
           )}
         </div>
       </div>
 
       {/* --- PAGINATION & INFO --- */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="flex flex-col md:flex-row items-start justify-between gap-6">
         <div className="text-[12px] text-zinc-600 font-bold">
           Showing {experiences.length} of {response.total} experiences
         </div>

@@ -73,7 +73,7 @@ export default function ExperienceForm({ initialData, action, title }: Experienc
     <div className="max-w-5xl mx-auto space-y-6 text-white animate-in fade-in duration-500 pb-20">
       <header className="flex flex-col gap-2">
         <Link href="/admin/experiences" className="flex items-center gap-2 text-zinc-500 hover:text-blue-400 text-sm w-fit transition-colors">
-          <ArrowLeft size={16} /> Kembali ke Pengalaman
+          <ArrowLeft size={16} /> Back to Experiences
         </Link>
         <h1 className="text-3xl font-bold">{title}</h1>
       </header>
@@ -82,26 +82,26 @@ export default function ExperienceForm({ initialData, action, title }: Experienc
         <div className="lg:col-span-2 space-y-6 bg-white/[0.03] p-8 rounded-[2.5rem] border border-white/5 shadow-2xl backdrop-blur-sm">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input 
-                label="Jabatan / Job Title" 
+                label="Job Title" 
                 name="job_title" 
                 defaultValue={initialData?.job_title} 
                 required 
-                placeholder="Contoh: Backend Developer Intern" 
+                placeholder="e.g. Backend Developer Intern" 
                 icon={<Briefcase size={16}/>}
             />
             <Input 
-                label="Perusahaan" 
+                label="Company" 
                 name="company" 
                 defaultValue={initialData?.company} 
                 required 
-                placeholder="Contoh: NVIDIA" 
+                placeholder="e.g. NVIDIA" 
                 icon={<Briefcase size={16}/>}
             />
           </div>
 
           <div className="space-y-2">
             <div className="flex justify-between items-center ml-1">
-              <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Tanggung Jawab & Pencapaian</label>
+              <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Responsibilities & Achievements</label>
               <span className="text-[10px] text-zinc-600 font-mono italic">Rich Text Editor</span>
             </div>
             
@@ -133,7 +133,7 @@ export default function ExperienceForm({ initialData, action, title }: Experienc
                <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest ml-1">Timeline</label>
                
                <Input 
-                 label="Tanggal Mulai" 
+                 label="Start Date" 
                  type="date" 
                  name="start_date" 
                  defaultValue={initialData?.start_date ? new Date(initialData.start_date).toISOString().split('T')[0] : ""} 
@@ -149,13 +149,13 @@ export default function ExperienceForm({ initialData, action, title }: Experienc
                     className="w-5 h-5 rounded-lg accent-blue-600"
                  />
                  <label htmlFor="is_current" className="text-xs font-medium text-zinc-300 cursor-pointer flex items-center gap-2">
-                    <Clock size={14} className="text-blue-400"/> Masih Bekerja Di Sini
+                    <Clock size={14} className="text-blue-400"/> Still Work Here
                  </label>
                </div>
 
                {!isCurrent && (
                  <Input 
-                   label="Tanggal Berakhir" 
+                   label="End Date" 
                    type="date" 
                    name="end_date" 
                    defaultValue={initialData?.end_date ? new Date(initialData.end_date).toISOString().split('T')[0] : ""} 
@@ -166,14 +166,14 @@ export default function ExperienceForm({ initialData, action, title }: Experienc
 
             <div className="space-y-2">
                 <Input 
-                    label="Skills (Pisahkan dengan koma)" 
+                    label="Skills (Separate with commas)" 
                     name="skills" 
                     defaultValue={initialData?.skills} 
                     required 
                     placeholder="Laravel, Prisma, Supabase" 
                     icon={<Wrench size={16}/>}
                 />
-                <p className="text-[10px] text-zinc-500 italic ml-1">*Akan diparsing otomatis menjadi tag</p>
+                <p className="text-[10px] text-zinc-500 italic ml-1">*Will be automatically parsed into tags</p>
             </div>
 
             <button 
@@ -181,7 +181,7 @@ export default function ExperienceForm({ initialData, action, title }: Experienc
                 className="w-full py-5 bg-blue-600 hover:bg-blue-500 disabled:bg-zinc-800 disabled:text-zinc-500 text-white rounded-[1.5rem] font-bold transition-all shadow-xl shadow-blue-900/20 flex items-center justify-center gap-3 group active:scale-95 mt-4"
             >
               {isPending ? <Loader2 className="animate-spin" size={20} /> : <Save size={20} className="group-hover:rotate-12 transition-transform" />}
-              {isPending ? "Tunggu..." : initialData ? "Simpan Perubahan" : "Simpan Pengalaman"}
+              {isPending ? "Please wait..." : initialData ? "Save Changes" : "Save Experience"}
             </button>
           </div>
         </div>

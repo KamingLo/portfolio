@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import Section from "@/components/layouts/sections";
 import { getHomeProjects } from "@/actions/public/home/action";
+import { CtaCard } from "@/components/ui/cta-card";
 
 export default async function Projects() {
     const projects = await getHomeProjects(2);
@@ -25,7 +26,7 @@ export default async function Projects() {
                         </span>
                     </div>
                     <p className="text-md sm:text-lg md:text-xl text-zinc-500 max-w-xl leading-relaxed">
-                        Koleksi proyek terbaru yang menampilkan inovasi dan keahlian dalam pengembangan aplikasi modern.
+                        A collection of recent projects showcasing innovation and expertise in modern application development.
                     </p>
                 </div>
             </div>
@@ -91,7 +92,7 @@ export default async function Projects() {
                                         className="inline-flex items-center gap-3 text-zinc-900 font-semibold group/btn"
                                     >
                                         <span className="border-b border-zinc-900 pb-1 group-hover/btn:text-blue-600 group-hover/btn:border-blue-600 transition-colors">
-                                            Lihat studi kasus
+                                            View case study
                                         </span>
                                         <ArrowUpRight size={18} className="group-hover/btn:text-blue-600 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                                     </Link>
@@ -103,32 +104,12 @@ export default async function Projects() {
             </div>
 
             {/* --- CTA ARCHIVE SECTION --- */}
-            <div className="mt-32">
-                <Link 
-                    href="/projects"
-                    className="group relative block overflow-hidden rounded-[3rem] border border-zinc-200 bg-zinc-50/50 p-12 md:p-24 text-center transition-all duration-500 hover:bg-zinc-100 hover:border-blue-500/20 active:border-blue-500"
-                >
-                    <div className="relative z-10 flex flex-col items-center space-y-6">
-                        <div className="space-y-4">
-                            <h3 className="text-4xl md:text-7xl text-zinc-900 font-semibold tracking-tight active:text-blue-500 transition-colors">
-                                Lihat seluruh project
-                            </h3>
-                            <p className="text-zinc-500 text-lg md:text-xl font-medium max-w-xl mx-auto">
-                                Eksplorasi detail teknis dari setiap sistem yang telah saya kembangkan.
-                            </p>
-                        </div>
-
-                        <div className="mt-4 flex items-center gap-3 text-zinc-900 font-semibold text-lg border-b border-zinc-200 pb-2 group-hover:border-blue-500 group-active:border-blue-500 group-active:text-blue-500 transition-all duration-500">
-                            <span>Buka portofolio lengkap</span>
-                            <div className="bg-zinc-100 p-3 rounded-full group-hover:bg-blue-600 group-active:bg-blue-500 transition-all duration-500">
-                                <ArrowUpRight size={22} className="group-hover:rotate-45 transition-transform duration-500" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-blue-500/5 blur-[120px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
-                </Link>
-            </div>
+            <CtaCard
+                href="/projects"
+                title="View all projects"
+                description="Explore the technical details of every system I have developed."
+                buttonText="Open full portfolio"
+            />
         </Section>
     );
 }

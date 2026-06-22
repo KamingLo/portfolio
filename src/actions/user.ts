@@ -14,7 +14,7 @@ export async function getUsers() {
     });
     return users;
   } catch (error) {
-    console.error("Gagal mengambil data user:", error);
+    console.error("Failed to fetch user data:", error);
     return [];
   }
 }

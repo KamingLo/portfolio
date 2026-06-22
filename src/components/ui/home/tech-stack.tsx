@@ -13,7 +13,7 @@ import {
 const StackCategories = [
   {
     title: "Development",
-    description: "Alat utama untuk membangun ekosistem dan logika aplikasi.",
+    description: "Primary tools for building the application ecosystem and logic.",
     logos: [
       { name: "Next.js", icon: siNextdotjs },
       { name: "Tailwind", icon: siTailwindcss },
@@ -25,7 +25,7 @@ const StackCategories = [
   },
   {
     title: "Infrastructure",
-    description: "Sistem dan kontainer untuk pengelolaan server aplikasi.",
+    description: "Systems and containers for application server management.",
     logos: [
       { name: "Docker", icon: siDocker },
       { name: "Ubuntu", icon: siUbuntu },
@@ -35,18 +35,14 @@ const StackCategories = [
 
 export const TechStack = () => (
   <Section id="stack" data-aos="fade-in" className="text-zinc-700">
-    <div className="max-w-[1440px] mx-auto py-12 md:py-20 px-6">
-      
-      {/* --- HEADER SECTION --- */}
-      <div className="flex flex-col items-center justify-center text-center mb-16 md:mb-24 space-y-4 border-b border-zinc-100 pb-10">
-        <span className="text-sm text-blue-500 font-semibold uppercase">
-          Software engine
-        </span>
+    <div className="py-12 md:py-20">
+    
+      <div className="flex flex-col items-start justify-start text-left mb-16 md:mb-24 space-y-4 border-b border-zinc-100 pb-10">
         <h2 className="text-4xl md:text-6xl font-semibold text-zinc-900">
           Tech stack
         </h2>
         <p className="text-zinc-500 max-w-lg text-base md:text-lg">
-          Teknologi pilihan untuk membangun produk yang skalabel dan berperforma tinggi.
+          Technologies of choice for building scalable, high-performance products.
         </p>
       </div>
 

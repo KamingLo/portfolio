@@ -5,9 +5,12 @@ import { getAuth } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 
 // Tambahkan pengecekan sederhana untuk tanggal
-const parseDate = (dateVal: any) => {
-  const d = new Date(dateVal);
-  return isNaN(d.getTime()) ? null : d;
+const parseDate = (dateVal: unknown) => {
+  if (typeof dateVal === "string" || typeof dateVal === "number" || dateVal instanceof Date) {
+    const d = new Date(dateVal);
+    return isNaN(d.getTime()) ? null : d;
+  }
+  return null;
 };
 
 export async function createExperience(formData: FormData) {
@@ -20,7 +23,7 @@ export async function createExperience(formData: FormData) {
     const startDateRaw = formData.get("start_date");
 
     if (!job_title || !company || !startDateRaw) {
-       throw new Error("Job title, company, dan start date wajib diisi.");
+       throw new Error("Job title, company, and start date are required.");
     }
 
     const lastExperience = await prisma.experience.findFirst({
@@ -52,12 +55,12 @@ export async function createExperience(formData: FormData) {
     });
 
     revalidatePath("/admin/experiences");
-    return { success: true, message: `Pengalaman ${newId} berhasil diterbitkan!` };
+    return { success: true, message: `Experience ${newId} published successfully!` };
 
   } catch (error) {
     console.error("DEBUG_ERROR:", error);
     // Pastikan error selalu string agar bisa di-serialize
-    return { success: false, message: error instanceof Error ? error.message : "Gagal membuat pengalaman." };
+    return { success: false, message: error instanceof Error ? error.message : "Failed to create experience." };
   }
 }
 
@@ -87,9 +90,10 @@ export async function getExperiences(page: number = 1, limit: number = 6) {
     };
 
   } catch (error) {
+    console.error("Failed to fetch experiences:", error);
     return { 
       success: false, 
-      message: "Gagal mengambil data", 
+      message: "Failed to fetch data", 
       data: [], 
       total: 0, 
       totalPages: 0 
@@ -119,10 +123,10 @@ export async function updateExperience(formData: FormData) {
     });
 
     revalidatePath("/admin/experiences");
-    return { success: true, message: "Pengalaman berhasil diperbarui!" };
+    return { success: true, message: "Experience updated successfully!" };
 
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Gagal memperbarui pengalaman.";
+    const errorMessage = error instanceof Error ? error.message : "Failed to update experience.";
     return { success: false, message: errorMessage };
   }
 }
@@ -133,9 +137,9 @@ export async function deleteExperience(id: string) {
     await prisma.experience.delete({ where: { id } });
 
     revalidatePath("/admin/experiences");
-    return { success: true, message: "Pengalaman berhasil dihapus." };
+    return { success: true, message: "Experience deleted successfully." };
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Gagal menghapus proyek.";
+    const errorMessage = error instanceof Error ? error.message : "Failed to delete experience.";
     return { success: false, message: errorMessage };
   }
 }

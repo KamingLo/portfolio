@@ -8,7 +8,7 @@ const Section = forwardRef<HTMLOptionElement, SectionProps>(
     return (
       <section
         ref={ref}
-        className={`py-6 w-full px-4 md:px-8 mb-8 ${className}`}
+        className={`py-6 w-full px-0 md:px-8 mb-8 ${className}`}
         {...props}
       >
         {children}

@@ -22,18 +22,18 @@ export default async function UsersPage() {
             className="group flex items-center gap-2 text-zinc-500 hover:text-blue-500 transition-all text-sm font-medium active:scale-95 w-fit"
           >
             <ArrowLeft size={16} />
-            Kembali ke dashboard
+            Back to dashboard
           </Link>
           
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
             <div className="space-y-1">
               <h1 className="text-3xl md:text-4xl font-bold text-white">User management</h1>
-              <p className="text-zinc-500 text-sm">Mengelola akses dan kredensial pengguna sistem.</p>
+              <p className="text-zinc-500 text-sm">Manage system user access and credentials.</p>
             </div>
             
             <button className="flex items-center justify-center gap-2 px-6 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold transition-all active:scale-[0.97] shadow-lg shadow-blue-900/20 w-full sm:w-auto">
               <UserPlus size={18} />
-              <span>Tambah pengguna</span>
+              <span>Add user</span>
             </button>
           </div>
         </div>
@@ -46,7 +46,7 @@ export default async function UsersPage() {
           <div className="flex items-center justify-between px-2">
             <h2 className="text-xl font-bold text-white flex items-center gap-3">
               <Users size={20} className="text-blue-500" />
-              Daftar pengguna 
+              User list 
               <span className="text-zinc-700 font-medium text-sm">({allUsers.length})</span>
             </h2>
           </div>
@@ -65,7 +65,7 @@ export default async function UsersPage() {
                     <span className="text-white font-bold truncate flex items-center gap-2">
                       {u.name}
                       {u.id === currentUser.id && (
-                        <span className="text-[10px] bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-full font-bold">Kamu</span>
+                        <span className="text-[10px] bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-full font-bold">You</span>
                       )}
                     </span>
                     <span className="text-zinc-500 text-xs truncate">{u.email}</span>
@@ -85,7 +85,7 @@ export default async function UsersPage() {
           <div className="px-2">
             <h2 className="text-xl font-bold text-white flex items-center gap-3">
               <Shield size={20} className="text-blue-500" />
-              Detail akun
+              Account details
             </h2>
           </div>
 
@@ -94,7 +94,7 @@ export default async function UsersPage() {
               {/* Field: Nama */}
               <div className="space-y-2">
                 <label className="text-xs font-bold text-zinc-500 flex items-center gap-2 ml-1">
-                  <UserIcon size={14} /> Nama lengkap
+                  <UserIcon size={14} /> Full name
                 </label>
                 <div className="bg-zinc-950 border border-zinc-800 p-4 rounded-2xl text-white font-medium">
                   {currentUser.name}
@@ -104,7 +104,7 @@ export default async function UsersPage() {
               {/* Field: Email */}
               <div className="space-y-2">
                 <label className="text-xs font-bold text-zinc-500 flex items-center gap-2 ml-1">
-                  <Mail size={14} /> Alamat email
+                  <Mail size={14} /> Email address
                 </label>
                 <div className="bg-zinc-950 border border-zinc-800 p-4 rounded-2xl text-white font-medium">
                   {currentUser.email}
@@ -114,12 +114,12 @@ export default async function UsersPage() {
               {/* Field: Password (Hidden/Preview) */}
               <div className="space-y-2">
                 <label className="text-xs font-bold text-zinc-500 flex items-center gap-2 ml-1">
-                  <Lock size={14} /> Kata sandi
+                  <Lock size={14} /> Password
                 </label>
                 <div className="bg-zinc-950 border border-zinc-800 p-4 rounded-2xl text-zinc-600 flex justify-between items-center">
                   <span>••••••••••••</span>
                   <button className="text-[10px] font-bold text-blue-500 hover:text-blue-400 active:scale-95 transition-all">
-                    Ubah sandi
+                    Change password
                   </button>
                 </div>
               </div>
@@ -127,12 +127,12 @@ export default async function UsersPage() {
 
             <div className="pt-6 border-t border-zinc-800/50">
                <button className="w-full py-4 bg-zinc-800 hover:bg-zinc-700 text-white rounded-2xl font-bold transition-all active:scale-[0.97]">
-                 Simpan perubahan
+               Save changes
                </button>
             </div>
 
-            <p className="text-[11px] text-zinc-600 text-center">
-              Perubahan pada detail akun akan memengaruhi sesi login anda saat ini.
+            <p className="text-[11px] text-zinc-600 text-left">
+              Changes to account details will affect your current login session.
             </p>
           </div>
         </div>

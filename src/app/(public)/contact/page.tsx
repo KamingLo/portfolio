@@ -50,12 +50,6 @@ export default function ContactPage() {
           </div>
 
           <div className="flex flex-col items-start md:w-1/2 md:pt-16 space-y-6">
-            <div className="inline-flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-              <span className="text-sm text-blue-600 font-semibold uppercase tracking-wider">
-                Get in touch
-              </span>
-            </div>
             <p className="text-md sm:text-lg md:text-xl text-zinc-500 max-w-xl leading-relaxed">
               Have a question or an exciting project in mind? Choose the most convenient way for you to connect, and let&apos;s make it happen.
             </p>

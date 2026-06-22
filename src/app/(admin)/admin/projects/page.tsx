@@ -25,7 +25,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1">
               <h1 className="text-3xl md:text-4xl font-bold text-white">Portfolio projects</h1>
-              <p className="text-zinc-500 text-sm">Total {response.total} karya terdaftar.</p>
+              <p className="text-zinc-500 text-sm">Total {response.total} registered works.</p>
             </div>
             <Link 
               href="/admin/projects/new" 
@@ -47,8 +47,8 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
               <tr className="text-zinc-500 text-xs border-b border-zinc-800 bg-zinc-900/50">
                 <th className="px-8 py-5 font-bold">Project</th>
                 <th className="px-8 py-5 font-bold">Category</th>
-                <th className="px-8 py-5 font-bold text-center">External links</th>
-                <th className="px-8 py-5 font-bold text-right">Aksi</th>
+                <th className="px-8 py-5 font-bold text-left">External links</th>
+                <th className="px-8 py-5 font-bold text-right">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-800">
@@ -84,7 +84,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
                       </span>
                     </td>
                     <td className="px-8 py-6">
-                      <div className="flex justify-center gap-2 text-zinc-500">
+                      <div className="flex justify-start gap-2 text-zinc-500">
                         <Link href={`/projects/${item.slug}`} target="_blank" className="p-2.5 bg-zinc-900 rounded-xl hover:text-blue-400 active:scale-90 transition-all border border-zinc-800">
                           <Eye size={18} />
                         </Link>
@@ -163,13 +163,13 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
               </div>
             ))
           ) : (
-            <div className="p-20 text-center text-zinc-600">Tidak ada proyek ditemukan.</div>
+            <div className="p-20 text-left px-8 text-zinc-600">No projects found.</div>
           )}
         </div>
       </div>
 
       {/* --- PAGINATION --- */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="flex flex-col md:flex-row items-start justify-between gap-6">
         <div className="text-[12px] text-zinc-600 font-bold">
           Showing {projects.length} of {response.total} projects
         </div>

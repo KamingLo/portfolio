@@ -32,7 +32,7 @@ export default async function ExperiencePage() {
           <div className="flex flex-col items-start space-y-6 md:w-1/2">
             <Logo />
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-zinc-900 tracking-tight">
-              Professional Journey.
+              Profesional Experience.
             </h1>
           </div>
 

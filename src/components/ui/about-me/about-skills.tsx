@@ -33,11 +33,11 @@ export const AboutSkills = () => (
     <div className="w-full h-px bg-zinc-200 my-16 md:my-24" />
 
     {/* Header */}
-    <div className="text-center mb-12 md:mb-20 space-y-3">
+    <div className="text-left mb-12 md:mb-20 space-y-3">
       <h2 className="text-3xl md:text-5xl font-semibold text-zinc-900">
         Core Capabilities
       </h2>
-      <p className="text-zinc-400 max-w-lg mx-auto text-base">
+      <p className="text-zinc-400 max-w-lg text-base">
         Strategic technical disciplines focused on delivering high-performance, scalable business solutions.
       </p>
     </div>

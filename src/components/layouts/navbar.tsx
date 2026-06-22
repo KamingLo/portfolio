@@ -31,7 +31,7 @@ export const Navbar = () => {
 
     return (
         <header className={`sticky top-0 w-full transition-all duration-300 [-webkit-tap-highlight-color:transparent] z-50 ${isOpen ? 'backdrop-blur-none' : 'backdrop-blur-md'}`}>
-            <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="mx-auto max-w-[1600px] px-4 md:px-12">
                 <nav className="flex items-center justify-between py-4 relative z-[210]">
                     
                     <Link href="/" className="pl-4 transition-opacity duration-200 active:opacity-70">

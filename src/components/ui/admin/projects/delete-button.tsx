@@ -55,15 +55,15 @@ export default function DeleteButton({ id, title }: { id: string; title: string 
         className="bg-zinc-950 border border-zinc-800 w-full max-w-sm rounded-[2.5rem] p-10 animate-in zoom-in-95 duration-300"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex flex-col items-center text-center space-y-6">
+        <div className="flex flex-col items-start text-left space-y-6">
           <div className="p-6 bg-red-500/10 rounded-full text-red-500 animate-pulse">
             <AlertTriangle size={40} strokeWidth={2.5} />
           </div>
           
           <div className="space-y-3">
-            <h3 className="text-2xl font-bold text-white ">Hapus Proyek?</h3>
+            <h3 className="text-2xl font-bold text-white ">Delete Project?</h3>
             <p className="text-zinc-500 text-sm">
-              Kamu akan menghapus <span className="text-zinc-200 font-bold underline decoration-red-500/50">{title}</span> secara permanen dari database dan storage.
+              You will permanently delete <span className="text-zinc-200 font-bold underline decoration-red-500/50">{title}</span> from the database and storage.
             </p>
           </div>
 
@@ -74,7 +74,7 @@ export default function DeleteButton({ id, title }: { id: string; title: string 
               className="w-full px-6 py-4 bg-red-600 hover:bg-red-500 disabled:bg-zinc-800 text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-3 active:scale-95"
             >
               {isDeleting ? <Loader2 size={20} className="animate-spin" /> : <Trash2 size={20} />}
-              {isDeleting ? "Menghapus..." : "Ya, Hapus sekarang"}
+              {isDeleting ? "Deleting..." : "Yes, Delete Now"}
             </button>
             
             <button
@@ -82,7 +82,7 @@ export default function DeleteButton({ id, title }: { id: string; title: string 
               onClick={() => setIsOpen(false)}
               className="w-full px-6 py-4 bg-transparent hover:bg-white/5 text-zinc-500 hover:text-white rounded-2xl transition-all text-md"
             >
-              Batalkan
+              Cancel
             </button>
           </div>
         </div>

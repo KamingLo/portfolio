@@ -4,13 +4,11 @@ import { CodeMockup } from "./code-mockup";
 
 export const HeroContent = () => {
   return (
-    <div className="relative z-10 flex flex-col items-center justify-center min-h-[85vh] px-6 pt-12 pb-8">
+    <div className="relative z-10 flex flex-col items-start justify-center min-h-[85vh] md:px-6 pt-12 pb-8">
       
-      {/* 2-Column Responsive Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center max-w-[1440px] w-full mx-auto">
         
-        {/* Left Column: Heading, Subheading & CTAs */}
-        <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+        <div className="lg:col-span-7 flex flex-col items-start text-left">
 
           <h1
             className="text-zinc-900 text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold tracking-tight leading-[1.1] max-w-2xl"
@@ -29,7 +27,7 @@ export const HeroContent = () => {
           </p>
 
           <div 
-            className="relative mt-8 flex flex-col sm:flex-row items-center gap-4 z-10"
+            className="relative mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4 z-10"
             data-aos="fade-up"
             data-aos-delay="200"
           >
@@ -49,13 +47,11 @@ export const HeroContent = () => {
           </div>
         </div>
 
-        {/* Right Column: Interactive Code Editor Mockup */}
         <div className="lg:col-span-5 w-full flex justify-center lg:justify-end">
           <CodeMockup />
         </div>
       </div>
 
-      {/* Scroll Indicator */}
       <div
         className="relative z-10 mt-16 animate-bounce"
         data-aos="fade-up"

@@ -15,7 +15,6 @@ export const CodeMockup = () => {
     return codeSnippets.find((s) => s.id === activeTab) || codeSnippets[0];
   }, [activeTab]);
 
-  // Auto-play cycle effect
   useEffect(() => {
     if (!isAutoPlaying) {
       if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
@@ -32,7 +31,7 @@ export const CodeMockup = () => {
         });
         setIsTransitioning(false);
       }, 200);
-    }, 9000); // cycle every 9 seconds
+    }, 9000);
 
     return () => {
       if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
@@ -46,7 +45,7 @@ export const CodeMockup = () => {
       setActiveTab(tabId);
       setIsTransitioning(false);
     }, 200);
-    setIsAutoPlaying(false); // pause auto-playing on user click
+    setIsAutoPlaying(false);
   };
 
   const getColorClass = (type: string) => {
@@ -85,7 +84,7 @@ export const CodeMockup = () => {
         <div className="text-xs text-zinc-400 font-medium font-mono">
           {activeSnippet.fileName}
         </div>
-        <div className="w-12" /> {/* spacer to balance layout */}
+        <div className="w-12" />
       </div>
 
       {/* Tabs */}
@@ -102,7 +101,6 @@ export const CodeMockup = () => {
                   : "text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100/50"
               }`}
             >
-              {/* Tab indicator icon */}
               {snippet.id === "nextjs" && <SimpleIcon icon={siNextdotjs} size={20} className={!isActive ? "text-zinc-400" : ""} style={isActive ? { color: `#${siNextdotjs.hex}` } : {}} />}
               {snippet.id === "laravel" && <SimpleIcon icon={siLaravel} size={20} className={!isActive ? "text-zinc-400" : ""} style={isActive ? { color: `#${siLaravel.hex}` } : {}} />}
               {snippet.id === "gin" && <SimpleIcon icon={siGo} size={20} className={!isActive ? "text-zinc-400" : ""} style={isActive ? { color: `#${siGo.hex}` } : {}} />}
@@ -115,14 +113,13 @@ export const CodeMockup = () => {
             </button>
           );
         })}
-        {/* Fill remaining empty space in tab bar */}
         <div className="flex-1 bg-zinc-50/50 min-w-[2rem]" />
       </div>
 
       {/* Editor Content */}
       <div className={`p-5 font-mono text-[13px] leading-relaxed overflow-x-auto min-h-[350px] bg-white flex transition-opacity duration-200 ${isTransitioning ? "opacity-0" : "opacity-100"}`}>
         {/* Line Numbers */}
-        <div className="flex flex-col text-zinc-300 text-right pr-4 select-none border-r border-zinc-100 min-w-[2.5rem]">
+        <div className="flex flex-col text-zinc-300 text-right pr-4 select-none border-r border-zinc-100 min-w-[2.5rem] shrink-0">
           {activeSnippet.lines.map((_, idx) => (
             <div key={idx} className="h-6">
               {idx + 1}
@@ -131,14 +128,14 @@ export const CodeMockup = () => {
         </div>
 
         {/* Static Code */}
-        <div className="pl-4 flex-1 text-zinc-800 select-all whitespace-pre">
+        <div className="pl-4 text-zinc-800 select-all min-w-max pb-2">
           {activeSnippet.lines.map((line, lineIdx) => {
             if (line.length === 0) {
               return <div key={lineIdx} className="h-6" />;
             }
 
             return (
-              <div key={lineIdx} className="h-6 flex items-center flex-wrap">
+              <div key={lineIdx} className="h-6 flex items-center whitespace-pre">
                 {line.map((token, tokenIdx) => (
                   <span key={tokenIdx} className={getColorClass(token.type)}>
                     {token.text}

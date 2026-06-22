@@ -16,7 +16,7 @@ export default async function DashboardPage() {
           Dashboard<span className="text-blue-600">.</span>
         </h1>
         <p className="text-zinc-500 text-lg font-medium">
-          Selamat bekerja, <span className="text-white">{user.name}</span>.
+          Welcome back, <span className="text-white">{user.name}</span>.
         </p>
       </header>
 
@@ -36,7 +36,7 @@ export default async function DashboardPage() {
           </div>
           <div className="relative z-10">
             <h2 className="text-2xl font-bold text-white tracking-tight">Portfolio Projects</h2>
-            <p className="text-blue-100/70 font-medium">Tambah, edit, atau hapus karya terbaik Anda.</p>
+            <p className="text-blue-100/70 font-medium">Add, edit, or delete your best works.</p>
           </div>
           {/* Decorative background circle */}
           <div className="absolute -right-8 -bottom-8 w-32 h-32 bg-white/10 rounded-full blur-3xl group-hover:bg-white/20 transition-all" />
@@ -55,7 +55,7 @@ export default async function DashboardPage() {
           </div>
           <div className="relative z-10">
             <h2 className="text-2xl font-bold text-white tracking-tight">User Management</h2>
-            <p className="text-zinc-500 font-medium">Kelola siapa saja yang bisa mengakses panel ini.</p>
+            <p className="text-zinc-500 font-medium">Manage who can access this panel.</p>
           </div>
         </Link>
 

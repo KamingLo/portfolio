@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import Section from "@/components/layouts/sections";
 import { format } from "date-fns";
 import { getLatestHomeExperience } from "@/actions/public/home/action";
+import { CtaCard } from "@/components/ui/cta-card";
 
 export async function Experience() {
     const experience = await getLatestHomeExperience();
@@ -77,21 +77,12 @@ export async function Experience() {
             </div>
 
             {/* --- CTA SECTION --- */}
-            <div className="mt-16 md:mt-24 border-t border-zinc-200 pt-16 text-center">
-                <Link 
-                    href="/experiences"
-                    className="inline-flex flex-col items-center group"
-                >
-                    <h3 className="text-3xl md:text-5xl text-zinc-900 font-medium tracking-tight group-hover:text-blue-600 transition-colors mb-6">
-                        Lihat pengalaman lainnya
-                    </h3>
-
-                    <div className="flex items-center gap-3 text-zinc-600 font-medium text-lg border-b border-zinc-900 pb-1 group-hover:border-blue-600 group-hover:text-blue-600 transition-all">
-                        <span>Buka portofolio lengkap</span>
-                        <ArrowUpRight size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    </div>
-                </Link>
-            </div>
+            <CtaCard
+                href="/experiences"
+                title="View more experiences"
+                description="Explore the details of my career history and professional journey."
+                buttonText="Open professional history"
+            />
         </Section>
     );
 }

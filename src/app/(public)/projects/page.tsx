@@ -3,6 +3,7 @@ import ProjectList from "@/components/ui/projects/project-list";
 import Link from "next/link";
 import MainLayout from "@/components/layouts/main-layout";
 import Section from "@/components/layouts/sections";
+import { Logo } from "@/components/ui/logo";
 
 export const dynamic = 'force-dynamic';
 
@@ -32,20 +33,16 @@ export default async function Page({
         {/* --- HERO SECTION --- */}
         <div className="flex flex-col md:flex-row items-start justify-between pt-16 md:pt-32 pb-16 md:pb-24 gap-12 md:gap-16 border-b border-zinc-100 mb-16 md:mb-24">
           <div className="flex flex-col items-start space-y-6 md:w-1/2">
+            <Logo />
+
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-zinc-900 tracking-tight">
-              Projects
+              Projects.
             </h1>
           </div>
 
           <div className="flex flex-col items-start md:w-1/2 md:pt-16 space-y-6">
-            <div className="inline-flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-              <span className="text-sm text-blue-600 font-semibold uppercase tracking-wider">
-                My Archive
-              </span>
-            </div>
             <p className="text-md sm:text-lg md:text-xl text-zinc-500 max-w-xl leading-relaxed">
-              Koleksi proyek terbaru yang menampilkan inovasi dan keahlian dalam pengembangan aplikasi modern.
+              A collection of recent projects showcasing innovation and expertise in modern application development.
             </p>
           </div>
         </div>

@@ -50,7 +50,7 @@ export default function ProjectForm({ initialData, action, title }: ProjectFormP
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!preview) return alert("Thumbnail wajib diisi!");
+    if (!preview) return alert("Thumbnail is required!");
     if (!editor) return;
 
     setIsPending(true);
@@ -76,25 +76,25 @@ export default function ProjectForm({ initialData, action, title }: ProjectFormP
     <div className="max-w-4xl mx-auto space-y-6 text-white animate-in fade-in duration-500 pb-20">
       <header className="flex flex-col gap-2">
         <Link href="/admin/projects" className="flex items-center gap-2 text-zinc-500 hover:text-blue-400 text-sm w-fit transition-colors">
-          <ArrowLeft size={16} /> Kembali ke Proyek
+          <ArrowLeft size={16} /> Back to Projects
         </Link>
         <h1 className="text-3xl font-bold">{title}</h1>
       </header>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6 bg-white/[0.03] p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
-          <Input label="Judul Proyek" name="title" defaultValue={initialData?.title} required placeholder="Contoh: E-Commerce Redesign" />
+          <Input label="Project Title" name="title" defaultValue={initialData?.title} required placeholder="e.g. E-Commerce Redesign" />
           
           <div className="grid grid-cols-2 gap-4">
             <Input label="Subtitle" name="subtitle" defaultValue={initialData?.subtitle} required placeholder="Web Development" />
-            <Input label="Kategori" name="category" defaultValue={initialData?.category} required placeholder="Fullstack" />
+            <Input label="Category" name="category" defaultValue={initialData?.category} required placeholder="Fullstack" />
           </div>
 
-          <Textarea label="Deskripsi Singkat" name="description" defaultValue={initialData?.description} rows={3} required placeholder="Ringkasan proyek untuk kartu portfolio..." />
+          <Textarea label="Short Description" name="description" defaultValue={initialData?.description} rows={3} required placeholder="Project summary for portfolio card..." />
           
           <div className="space-y-2">
             <div className="flex justify-between items-center ml-1">
-              <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Studi Kasus / Detail Proyek</label>
+              <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Case Study / Project Details</label>
               <span className="text-[10px] text-zinc-600 font-mono">HTML Format</span>
             </div>
             
@@ -163,7 +163,7 @@ export default function ProjectForm({ initialData, action, title }: ProjectFormP
 
             <button disabled={isPending} className="w-full py-5 bg-blue-600 hover:bg-blue-500 disabled:bg-zinc-800 disabled:text-zinc-500 text-white rounded-[1.5rem] font-bold transition-all shadow-xl shadow-blue-900/20 flex items-center justify-center gap-3 group active:scale-95">
               {isPending ? <Loader2 className="animate-spin" size={20} /> : <Save size={20} className="group-hover:rotate-12 transition-transform" />}
-              {isPending ? "Tunggu Sebentar..." : initialData ? "Simpan Perubahan" : "Terbitkan Proyek"}
+              {isPending ? "Please Wait..." : initialData ? "Save Changes" : "Publish Project"}
             </button>
           </div>
         </div>
